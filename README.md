@@ -1,19 +1,48 @@
 JavaScript
 ----------
 
+- JavaScript
 
-Courtesies:
------------
-https://angular.io   
-https://backbonejs.org  
-https://coffeescript.org  
-https://ecma-international.org  
-https://emberjs.com  
-https://jquery.com  
-https://knockoutjs.com  
-https://nodejs.org  
-https://reactjs.org  
-https://stripe.com  
-https://typescriptlang.org  
-https://rules.sonarsource.com/javascript  
-https://rules.sonarsource.com/typescript
+- Node.js
+
+- Express.js
+
+- React
+
+- Angular
+
+- TypeScript
+
+- Backbone.js
+
+- Ember.js
+
+- Knockout.js
+
+- Stripe.js
+
+- jQuery
+
+- ECMAScript
+
+- CoffeeScript
+
+Credits
+-------
+[nodejs.org](https://nodejs.org/)  
+[npmjs.com](https://npmjs.com/)  
+[expressjs.com](https://expressjs.com/)  
+[reactjs.org](https://reactjs.org/)  
+[angular.io](https://angular.io/)  
+[typescriptlang.org](https://typescriptlang.org/)  
+[backbonejs.org](https://backbonejs.org/)  
+[emberjs.com](https://emberjs.com/)  
+[knockoutjs.com](https://knockoutjs.com/)  
+[stripe.com](https://stripe.com/)  
+[jquery.com](https://jquery.com/)  
+[ecma-international.org](https://ecma-international.org/)  
+[coffeescript.org](https://coffeescript.org/)  
+[developer.mozilla.org](https://developer.mozilla.org/)  
+[getbootstrap.com](https://getbootstrap.com/)  
+[rules.sonarsource.com/javascript](https://rules.sonarsource.com/javascript/)  
+[rules.sonarsource.com/typescript](https://rules.sonarsource.com/typescript/)
