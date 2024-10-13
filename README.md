@@ -29,6 +29,22 @@ JavaScript
 
 Credits
 -------
+Credits/nodejs.org.svg?raw=true)](https://nodejs.org)  
+[![image](
+Credits/npmjs.com.svg?raw=true)](https://npmjs.com)  
+[![image](
+Credits/pnpm.io.svg?raw=true)](https://pnpm.io)  
+[![image](
+Credits/jquery.com.svg?raw=true)](https://jquery.com)  
+[![image](
+Credits/javascript.com.svg?raw=true)](https://javascript.com)  
+[![image](
+Credits/developer.mozilla.org.svg?raw=true)](https://developer.mozilla.org)  
+[![image](
+Credits/getbootstrap.com.svg?raw=true)](https://getbootstrap.com)  
+
+
+
 [nodejs.org](https://nodejs.org/)  
 [npmjs.com](https://npmjs.com/)  
 [expressjs.com](https://expressjs.com/)  
