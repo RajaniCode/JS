@@ -62,7 +62,7 @@ Credits/coffeescript.org.svg?raw=true)](https://coffeescript.org)
 [![image](
 Credits/openjsf.org.svg?raw=true)](https://openjsf.org)    
 [![image](
-Credits/ecma-international.org1.svg?raw=true)](https://ecma-international.org)  
+Credits/ecma-international.org.svg?raw=true)](https://ecma-international.org)  
 [![image](
 Credits/getbootstrap.com.svg?raw=true)](https://getbootstrap.com)  
 [![image](
