@@ -1,8 +1,6 @@
 JavaScript
 ----------
 
-- JavaScript
-
 - Node.js
 
 - Express.js
@@ -21,11 +19,13 @@ JavaScript
 
 - Stripe.js
 
+- JavaScript
+
 - jQuery
 
-- ECMAScript
-
 - CoffeeScript
+
+- ECMAScript
 
 Credits
 -------
@@ -68,25 +68,4 @@ Credits/getbootstrap.com.svg?raw=true)](https://getbootstrap.com)
 [![image](
 Credits/JavaScript-static-code-analysis-rules.sonarsource.com.svg?raw=true)](https://rules.sonarsource.com/javascript)
 [![image](
-Credits/TypeScript-static-code-analysis-rules.sonarsource.com.svg?raw=true)](https://rules.sonarsource.com/typescript)
-
-
-
-[nodejs.org](https://nodejs.org/)  
-[npmjs.com](https://npmjs.com/)  
-[expressjs.com](https://expressjs.com/)  
-[reactjs.org](https://reactjs.org/)  
-[angular.io](https://angular.io/)  
-[typescriptlang.org](https://typescriptlang.org/)  
-[backbonejs.org](https://backbonejs.org/)  
-[emberjs.com](https://emberjs.com/)  
-[knockoutjs.com](https://knockoutjs.com/)  
-[stripe.com](https://stripe.com/)  
-[jquery.com](https://jquery.com/)  
-[ecma-international.org](https://ecma-international.org/)  
-[coffeescript.org](https://coffeescript.org/)  
-[developer.mozilla.org](https://developer.mozilla.org/)  
-[getbootstrap.com](https://getbootstrap.com/)  
-[rules.sonarsource.com/javascript](https://rules.sonarsource.com/javascript/)  
-[rules.sonarsource.com/typescript](https://rules.sonarsource.com/typescript/)
-
+Credits/TypeScript-static-code-analysis-rules.sonarsource.com.svg?raw=true)](https://rules.sonarsource.com/typescript)  
