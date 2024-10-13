@@ -58,9 +58,9 @@ Credits/javascript.com.svg?raw=true)](https://javascript.com)
 [![image](
 Credits/developer.mozilla.org.svg?raw=true)](https://developer.mozilla.org)  
 [![image](
-Credits/ecma-international.org].svg?raw=true)](https://ecma-international.org])  
+Credits/ecma-international.org.svg?raw=true)](https://ecma-international.org)  
 [![image](
-Credits/coffeescript.org].svg?raw=true)](https://coffeescript.org])  
+Credits/coffeescript.org.svg?raw=true)](https://coffeescript.org)    
 [![image](
 Credits/getbootstrap.com.svg?raw=true)](https://getbootstrap.com)  
 [![image](
