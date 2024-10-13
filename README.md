@@ -48,7 +48,7 @@ Credits/backbonejs.org.svg?raw=true)](https://backbonejs.org)
 [![image](
 Credits/emberjs.com.svg?raw=true)](https://emberjs.com)  
 [![image](
-Credits/knockoutjs.org.svg?raw=true)](https://knockoutjs.org)  
+Credits/knockoutjs.com.svg?raw=true)](https://knockoutjs.com)  
 [![image](
 Credits/stripe.com.svg?raw=true)](https://stripe.com)  
 [![image](
