@@ -56,7 +56,7 @@ Credits/jquery.com.svg?raw=true)](https://jquery.com)
 [![image](
 Credits/javascript.com.svg?raw=true)](https://javascript.com)  
 [![image](
-Credits/developer.mozilla.org.svg?raw=true)](https://developer.mozilla.org) 
+Credits/developer.mozilla.org.svg?raw=true)](https://developer.mozilla.org)  
 [![image](
 Credits/coffeescript.org.svg?raw=true)](https://coffeescript.org)    
 [![image](
