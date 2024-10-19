@@ -64,6 +64,6 @@ Credits/ecma-international.org.svg?raw=true)](https://ecma-international.org/)
 [![image](
 Credits/getbootstrap.com.svg?raw=true)](https://getbootstrap.com/)  
 [![image](
-Credits/JavaScript-static-code-analysis-rules.sonarsource.com.svg?raw=true)](https://rules.sonarsource.com/javascript/)
+Credits/JavaScript-static-code-analysis-rules.sonarsource.com.svg?raw=true)](https://rules.sonarsource.com/javascript/)  
 [![image](
 Credits/TypeScript-static-code-analysis-rules.sonarsource.com.svg?raw=true)](https://rules.sonarsource.com/typescript/)  
