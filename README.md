@@ -48,7 +48,7 @@ Credits/backbonejs.org.svg)](https://backbonejs.org/)
 [![image](
 Credits/emberjs.com.svg)](https://emberjs.com/)  
 [![image](
-Credits/knockoutjs.com.svg)](https://knockoutjs.com/)  
+Credits/knocko1utjs.com.svg)](https://knockoutjs.com/)  
 [![image](
 Credits/stripe.com.svg)](https://stripe.com/)  
 [![image](
@@ -60,7 +60,7 @@ Credits/coffeescript.org.svg)](https://coffeescript.org/)
 [![image](
 Credits/openjsf.org.svg)](https://openjsf.org/)    
 [![image](
-Credits/ecma-international.org.svg)](https://ecma-international.org/)  
+Credits/ecma-interna1tional.org.svg)](https://ecma-international.org/)  
 [![image](
 Credits/getbootstrap.com.svg)](https://getbootstrap.com/)  
 [![image](
