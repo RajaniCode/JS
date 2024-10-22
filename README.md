@@ -44,8 +44,6 @@ Credits/emberjs.com.svg)](https://emberjs.com/)
 [![image](
 Credits/knockoutjs.com.svg)](https://knockoutjs.com/)  
 [![image](
-Credits/stripe.com.svg)](https://stripe.com/)  
-[![image](
 Credits/jquery.com.svg)](https://jquery.com/)  
 [![image](
 Credits/developer.mozilla.org.svg)](https://developer.mozilla.org/)  
@@ -59,6 +57,8 @@ Credits/ecma-international.org.svg)](https://ecma-international.org/)
 Credits/getbootstrap.com.svg)](https://getbootstrap.com/)  
 [![image](
 Credits/jetbrains.com.svg)](https://jetbrains.com/)  
+[![image](
+Credits/stripe.com.svg)](https://stripe.com/)  
 [![image](
 Credits/JavaScript-static-code-analysis-rules.sonarsource.com.svg)](https://rules.sonarsource.com/javascript/)  
 [![image](
