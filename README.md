@@ -54,7 +54,7 @@ Credits/coffeescript.org.svg)](https://coffeescript.org/)
 [![image](
 Credits/openjsf.org.svg)](https://openjsf.org/)    
 [![image](
-Credits/ecma-international.org.svg)](https://ecma-international.org/)<!-+[![image](
+Credits/ecma-international.org.svg)](https://ecma-international.org/)<!--[![image](
 Credits/javascript.com.svg)](https://javascript.com/)-->  
 [![image](
 Credits/getbootstrap.com.svg)](https://getbootstrap.com/)  
