@@ -57,6 +57,10 @@ Credits/openjsf.org.svg)](https://openjsf.org/)
 Credits/ecma-international.org.svg)](https://ecma-international.org/)<!--[![image](
 Credits/javascript.com.svg)](https://javascript.com/)-->  
 [![image](
+Credits/mochajs.org.svg)](https://mochajs.org/)    
+[![image](
+Credits/cypress.io.svg)](https://cypress.io/)  
+[![image](
 Credits/getbootstrap.com.svg)](https://getbootstrap.com/)  
 [![image](
 Credits/jetbrains.com.svg)](https://jetbrains.com/)<!--[![image](
