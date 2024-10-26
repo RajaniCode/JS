@@ -65,6 +65,8 @@ Credits/chaijs.com.svg)](https://chaijs.com/)
 [![image](
 Credits/jasmine.github.io.svg)](https://jasmine.github.io/)    
 [![image](
+Credits/jestjs.io.svg)](https://jestjs.io/)    
+[![image](
 Credits/getbootstrap.com.svg)](https://getbootstrap.com/)  
 [![image](
 Credits/jetbrains.com.svg)](https://jetbrains.com/)<!--[![image](
