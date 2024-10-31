@@ -69,6 +69,8 @@ Credits/jestjs.io.svg)](https://jestjs.io/)
 [![image](
 Credits/getbootstrap.com.svg)](https://getbootstrap.com/)  
 [![image](
+Credits/centos.org.svg)](https://centos.org/)  
+[![image](
 Credits/jetbrains.com.svg)](https://jetbrains.com/)<!--[![image](
 Credits/Fleet-jetbrains.com.svg)](https://jetbrains.com/fleet/)  
 [![image](
