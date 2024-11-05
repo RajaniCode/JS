@@ -34,6 +34,10 @@ Credits/nvm.sh.svg)](https://nvm.sh/)
 [![image](
 Credits/expressjs.com.svg)](https://expressjs.com/)  
 [![image](
+Credits/cloud.google.com.svg)](https://cloud.google.com/)  
+[![image](
+Credits/debian.org.svg)](https://debian.org/)  
+[![image](
 Credits/aws.amazon.com.svg)](https://aws.amazon.com/)  
 [![image](
 Credits/centos.org.svg)](https://centos.org/)  
@@ -41,6 +45,8 @@ Credits/centos.org.svg)](https://centos.org/)
 Credits/fedoraproject.org.svg)](https://fedoraproject.org/)  
 [![image](
 Credits/redhat.com.svg)](https://redhat.com/)  
+[![image](
+Credits/azure.microsoft.com.svg)](https://azure.microsoft.com/) 
 [![image](
 Credits/kubernetes.io.svg)](https://kubernetes.io/)  
 [![image](
