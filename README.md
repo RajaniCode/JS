@@ -46,7 +46,7 @@ Credits/fedoraproject.org.svg)](https://fedoraproject.org/)
 [![image](
 Credits/redhat.com.svg)](https://redhat.com/)  
 [![image](
-Credits/azure.microsoft.com.svg)](https://azure.microsoft.com/) 
+Credits/azure.microsoft.com.svg)](https://azure.microsoft.com/)  
 [![image](
 Credits/kubernetes.io.svg)](https://kubernetes.io/)  
 [![image](
