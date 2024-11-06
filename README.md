@@ -28,9 +28,8 @@ Credits/nodejs.org.svg)](https://nodejs.org/)
 [![image](
 Credits/npmjs.com.svg)](https://npmjs.com/)  
 [![image](
-Credits/pnpm.io.svg)](https://pnpm.io/)  
-[![image](
-Credits/nvm.sh.svg)](https://nvm.sh/)  
+Credits/pnpm.io.svg)](https://pnpm.io/)<!--[![image](
+Credits/nvm.sh.svg)](https://nvm.sh/)-->  
 [![image](
 Credits/expressjs.com.svg)](https://expressjs.com/)  
 [![image](
