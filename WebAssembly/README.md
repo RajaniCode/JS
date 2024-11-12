@@ -63,7 +63,7 @@ Credits/maven.apache.org.svg)](https://maven.apache.org/)
 [![image](
 Credits/gradle.org.svg)](https://gradle.org/)  
 [![image](
-Credits/gradle.com.svg)](https://gradle.com/) 
+Credits/gradle.com.svg)](https://gradle.com/)  
 [![image](
 Credits/developer.mozilla.org.svg)](https://developer.mozilla.org/)  
 [![image](
