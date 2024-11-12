@@ -39,9 +39,9 @@ Credits/CS.NET-dotnet.microsoft.com.svg)](https://dotnet.microsoft.com/)
 [![image](
 Credits/CS-dotnet.microsoft.com.svg)](https://dotnet.microsoft.com/languages/csharp/)  
 [![image](
-Credits/openjdk.org.svg)](https://openjdk.org/) 
+Credits/openjdk.org.svg)](https://openjdk.org/)  
 [![image](
-Credits/Java-oracle.com.svg)](https://https://oracle.com/java/) 
+Credits/Java-oracle.com.svg)](https://https://oracle.com/java/)  
 [![image](
 Credits/ruby-lang.org.svg)](https://ruby-lang.org/)  
 [![image](
