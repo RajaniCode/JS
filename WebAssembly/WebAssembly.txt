@@ -1217,7 +1217,7 @@ wasm=application/wasm
 % ls $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps
 
 
-cd $HOME/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/wasmbrowser-1.0.0
+cd $HOME
 
 # HTTP server
 [
@@ -1490,5 +1490,7 @@ https://nodejs.org/
 https://npmjs.com/
 https://php.net/
 https://gcc.gnu.org/
+https://maven.apache.org/
+https://gradle.org/
 https://developer.mozilla.org/
 */
