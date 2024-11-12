@@ -41,7 +41,7 @@ Credits/CS-dotnet.microsoft.com.svg)](https://dotnet.microsoft.com/languages/csh
 [![image](
 Credits/openjdk.org.svg)](https://openjdk.org/)  
 [![image](
-Credits/Java-oracle.com.svg)](https://https://oracle.com/java/)  
+Credits/Java-oracle.com.svg)](https://oracle.com/java/)  
 [![image](
 Credits/ruby-lang.org.svg)](https://ruby-lang.org/)  
 [![image](
