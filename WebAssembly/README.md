@@ -49,7 +49,7 @@ Credits/rubygems.org.svg)](https://rubygems.org/)
 [![image](
 Credits/python.org.svg)](https://python.org/)  
 [![image](
-Credits/pypi.org.svg)](https://pypi.org/)
+Credits/pypi.org.svg)](https://pypi.org/)  
 [![image](
 Credits/nodejs.org.svg)](https://nodejs.org/)  
 [![image](
