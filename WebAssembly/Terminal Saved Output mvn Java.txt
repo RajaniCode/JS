@@ -1,0 +1,438 @@
+Last login: Tue Nov 12 16:05:00 on ttys000
+rajaniapple@Rajanis-MacBook-Pro ~ % sw_vers       
+ProductName:		macOS
+ProductVersion:		15.1
+BuildVersion:		24B83
+rajaniapple@Rajanis-MacBook-Pro ~ % arch          
+arm64
+rajaniapple@Rajanis-MacBook-Pro ~ % brew update   
+==> Updating Homebrew...
+Already up-to-date.
+rajaniapple@Rajanis-MacBook-Pro ~ % cd $HOME/Desktop/GitHub/Auxiliary-Add/WebAssembly
+rajaniapple@Rajanis-MacBook-Pro WebAssembly % mkdir -p Java
+rajaniapple@Rajanis-MacBook-Pro WebAssembly % cd Java
+rajaniapple@Rajanis-MacBook-Pro Java % export PATH="$HOME/Downloads/Software/JDK/JDK8/jdk1.8.0_401.jdk//Contents/Home//bin/:$HOME/Downloads/Software/ApacheMaven/apache-maven-3.9.9/bin/":$PATH
+rajaniapple@Rajanis-MacBook-Pro Java % java -version
+java version "1.8.0_401"
+Java(TM) SE Runtime Environment (build 1.8.0_401-b10)
+Java HotSpot(TM) 64-Bit Server VM (build 25.401-b10, mixed mode)
+rajaniapple@Rajanis-MacBook-Pro Java % mvn --version
+Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
+Maven home: /Users/rajaniapple/Downloads/Software/ApacheMaven/apache-maven-3.9.9
+Java version: 1.8.0_401, vendor: Oracle Corporation, runtime: /Users/rajaniapple/Downloads/Software/JDK/JDK8/jdk1.8.0_401.jdk/Contents/Home/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "15.1", arch: "aarch64", family: "mac"
+rajaniapple@Rajanis-MacBook-Pro Java % mvn -DarchetypeCatalog=local -DarchetypeGroupId=org.teavm -DarchetypeArtifactId=teavm-maven-webapp -DarchetypeVersion=0.5.1 archetype:generate
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< org.apache.maven:standalone-pom >-------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] >>> archetype:3.3.1:generate (default-cli) > generate-sources @ standalone-pom >>>
+[INFO] 
+[INFO] <<< archetype:3.3.1:generate (default-cli) < generate-sources @ standalone-pom <<<
+[INFO] 
+[INFO] 
+[INFO] --- archetype:3.3.1:generate (default-cli) @ standalone-pom ---
+[INFO] Generating project in Interactive mode
+[WARNING] Archetype not found in any catalog. Falling back to central repository.
+[WARNING] Add a repository with id 'archetype' in your settings.xml if archetype's repository is elsewhere.
+Define value for property 'groupId': com.commons
+Define value for property 'artifactId': wasmbrowser
+Define value for property 'version' 1.0-SNAPSHOT: 1.0.0
+Define value for property 'package' com.commons: com.commons.project
+Confirm properties configuration:
+groupId: com.commons
+artifactId: wasmbrowser
+version: 1.0.0
+package: com.commons.project
+ Y: Y
+[INFO] ----------------------------------------------------------------------------
+[INFO] Using following parameters for creating project from Archetype: teavm-maven-webapp:0.5.1
+[INFO] ----------------------------------------------------------------------------
+[INFO] Parameter: groupId, Value: com.commons
+[INFO] Parameter: artifactId, Value: wasmbrowser
+[INFO] Parameter: version, Value: 1.0.0
+[INFO] Parameter: package, Value: com.commons.project
+[INFO] Parameter: packageInPathFormat, Value: com/commons/project
+[INFO] Parameter: package, Value: com.commons.project
+[INFO] Parameter: version, Value: 1.0.0
+[INFO] Parameter: groupId, Value: com.commons
+[INFO] Parameter: artifactId, Value: wasmbrowser
+[INFO] Project created from Archetype in dir: /Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  29.995 s
+[INFO] Finished at: 2024-11-12T16:08:36+05:30
+[INFO] ------------------------------------------------------------------------
+rajaniapple@Rajanis-MacBook-Pro Java % cd wasmbrowser
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % mvn package
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.commons:wasmbrowser >-----------------------
+[INFO] Building wasmbrowser 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ wasmbrowser ---
+[INFO] skip non existing resourceDirectory /Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.1:compile (default-compile) @ wasmbrowser ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/classes
+[INFO] 
+[INFO] --- teavm:0.5.1:compile (web-client) @ wasmbrowser ---
+[INFO] Preparing classpath for JavaScript generation
+[INFO] Using the following classpath for JavaScript generation: /Users/rajaniapple/.m2/repository/org/teavm/teavm-classlib/0.5.1/teavm-classlib-0.5.1.jar:/Users/rajaniapple/.m2/repository/org/teavm/teavm-platform/0.5.1/teavm-platform-0.5.1.jar:/Users/rajaniapple/.m2/repository/org/teavm/teavm-core/0.5.1/teavm-core-0.5.1.jar:/Users/rajaniapple/.m2/repository/org/teavm/teavm-interop/0.5.1/teavm-interop-0.5.1.jar:/Users/rajaniapple/.m2/repository/commons-io/commons-io/2.4/commons-io-2.4.jar:/Users/rajaniapple/.m2/repository/com/carrotsearch/hppc/0.6.1/hppc-0.6.1.jar:/Users/rajaniapple/.m2/repository/org/teavm/teavm-jso/0.5.1/teavm-jso-0.5.1.jar:/Users/rajaniapple/.m2/repository/org/teavm/teavm-jso-impl/0.5.1/teavm-jso-impl-0.5.1.jar:/Users/rajaniapple/.m2/repository/org/mozilla/rhino/1.7.7/rhino-1.7.7.jar:/Users/rajaniapple/.m2/repository/org/ow2/asm/asm-debug-all/5.2/asm-debug-all-5.2.jar:/Users/rajaniapple/.m2/repository/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar:/Users/rajaniapple/.m2/repository/com/jcraft/jzlib/1.1.3/jzlib-1.1.3.jar:/Users/rajaniapple/.m2/repository/joda-time/joda-time/2.7/joda-time-2.7.jar:/Users/rajaniapple/.m2/repository/org/teavm/teavm-jso-apis/0.5.1/teavm-jso-apis-0.5.1.jar:/Users/rajaniapple/.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar:/Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/classes
+[INFO] Building JavaScript file
+[INFO] Output file successfully built
+[INFO] Debug information successfully written
+[INFO] Source maps successfully written
+[INFO] Source files successfully written
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ wasmbrowser ---
+[INFO] skip non existing resourceDirectory /Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.1:testCompile (default-testCompile) @ wasmbrowser ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ wasmbrowser ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- war:2.4:war (default-war) @ wasmbrowser ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [wasmbrowser] in [/Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/wasmbrowser-1.0.0]
+[INFO] Processing war project
+[INFO] Copying webapp webResources [/Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/generated/js] to [/Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/wasmbrowser-1.0.0]
+[INFO] Copying webapp resources [/Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/src/main/webapp]
+[INFO] Webapp assembled in [25 msecs]
+[INFO] Building war: /Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/wasmbrowser-1.0.0.war
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.732 s
+[INFO] Finished at: 2024-11-12T16:08:49+05:30
+[INFO] ------------------------------------------------------------------------
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % nano $HOME/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/src/main/java/com/commons/project/Client.java
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % cat $HOME/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/src/main/java/com/commons/project/Client.java
+package com.commons.project;
+
+import org.teavm.interop.*;
+
+public class Client {
+
+    @Export(name = "math")
+    public static void math(int x, int y) {
+        run(x * y);
+    }
+
+    @Import(module = "env", name = "run")
+    private static native void run(int number);
+}
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % nano $HOME//Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/src/main/webapp/index.js 
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % cat $HOME//Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/src/main/webapp/index.js
+let x = 5;
+let y = 7;
+let result = 0;
+
+function run(number) {
+    console.log("WASM called JavaScript run method.");
+    result = number;
+    console.log(`Math: ${x} x ${y} = ${result}`);
+}
+
+WebAssembly.instantiateStreaming (
+  fetch('wasm/index.wasm'), {env: {run}})
+    .then(module => { 
+      console.log("Calling the wasm module from JavaScript.");
+
+      module.instance.exports.math(x, y);
+
+      document.body.innerHTML = `Browser: ${navigator.userAgent} <br\><br\> Math: ${x} x ${y} = ${result}`;
+});
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % nano $HOME//Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/src/main/webapp/index.html
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % cat $HOME//Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/src/main/webapp/index.html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Java WebAssembly</title>
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body></body>
+</html>
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % mkdir -p src/main/resources/META-INF/nanohttpd/
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % ls -p src/main/resources/META-INF/nanohttpd/
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % nano src/main/resources/META-INF/nanohttpd/mimetypes.properties
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % cat src/main/resources/META-INF/nanohttpd/mimetypes.properties
+wasm=application/wasm
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % ls src/main/webapp
+WEB-INF		index.html	index.js
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % wget https://www.google.com/favicon.ico --directory-prefix=src/main/webapp
+--2024-11-12 16:16:51--  https://www.google.com/favicon.ico
+Resolving www.google.com (www.google.com)... 2404:6800:4009:827::2004, 142.250.193.100
+Connecting to www.google.com (www.google.com)|2404:6800:4009:827::2004|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 5430 (5.3K) [image/x-icon]
+Saving to: ‘src/main/webapp/favicon.ico’
+
+favicon.ico                        100%[================================================================>]   5.30K  --.-KB/s    in 0.01s   
+
+2024-11-12 16:16:52 (409 KB/s) - ‘src/main/webapp/favicon.ico’ saved [5430/5430]
+
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % ls src/main/webapp
+WEB-INF		favicon.ico	index.html	index.js
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % mvn clean
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.commons:wasmbrowser >-----------------------
+[INFO] Building wasmbrowser 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ wasmbrowser ---
+[INFO] Deleting /Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.178 s
+[INFO] Finished at: 2024-11-12T16:19:00+05:30
+[INFO] ------------------------------------------------------------------------
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % mvn package
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.commons:wasmbrowser >-----------------------
+[INFO] Building wasmbrowser 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ wasmbrowser ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.1:compile (default-compile) @ wasmbrowser ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/classes
+[INFO] 
+[INFO] --- teavm:0.5.1:compile (web-client) @ wasmbrowser ---
+[INFO] Preparing classpath for JavaScript generation
+[INFO] Using the following classpath for JavaScript generation: /Users/rajaniapple/.m2/repository/org/teavm/teavm-classlib/0.5.1/teavm-classlib-0.5.1.jar:/Users/rajaniapple/.m2/repository/org/teavm/teavm-platform/0.5.1/teavm-platform-0.5.1.jar:/Users/rajaniapple/.m2/repository/org/teavm/teavm-core/0.5.1/teavm-core-0.5.1.jar:/Users/rajaniapple/.m2/repository/org/teavm/teavm-interop/0.5.1/teavm-interop-0.5.1.jar:/Users/rajaniapple/.m2/repository/commons-io/commons-io/2.4/commons-io-2.4.jar:/Users/rajaniapple/.m2/repository/com/carrotsearch/hppc/0.6.1/hppc-0.6.1.jar:/Users/rajaniapple/.m2/repository/org/teavm/teavm-jso/0.5.1/teavm-jso-0.5.1.jar:/Users/rajaniapple/.m2/repository/org/teavm/teavm-jso-impl/0.5.1/teavm-jso-impl-0.5.1.jar:/Users/rajaniapple/.m2/repository/org/mozilla/rhino/1.7.7/rhino-1.7.7.jar:/Users/rajaniapple/.m2/repository/org/ow2/asm/asm-debug-all/5.2/asm-debug-all-5.2.jar:/Users/rajaniapple/.m2/repository/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar:/Users/rajaniapple/.m2/repository/com/jcraft/jzlib/1.1.3/jzlib-1.1.3.jar:/Users/rajaniapple/.m2/repository/joda-time/joda-time/2.7/joda-time-2.7.jar:/Users/rajaniapple/.m2/repository/org/teavm/teavm-jso-apis/0.5.1/teavm-jso-apis-0.5.1.jar:/Users/rajaniapple/.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar:/Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/classes
+[INFO] Building JavaScript file
+[INFO] Output file successfully built
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ wasmbrowser ---
+[INFO] skip non existing resourceDirectory /Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.1:testCompile (default-testCompile) @ wasmbrowser ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ wasmbrowser ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- war:2.4:war (default-war) @ wasmbrowser ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [wasmbrowser] in [/Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/wasmbrowser-1.0.0]
+[INFO] Processing war project
+[INFO] Copying webapp webResources [/Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/webapp] to [/Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/wasmbrowser-1.0.0]
+[INFO] Copying webapp resources [/Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/src/main/webapp]
+[INFO] Webapp assembled in [14 msecs]
+[INFO] Building war: /Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/wasmbrowser-1.0.0.war
+[INFO] 
+[INFO] --- exec:1.6.0:java (default) @ wasmbrowser ---
+Server started, Hit Enter to stop.
+
+GET '/' 
+  HDR: 'remote-addr' = '127.0.0.1'
+  HDR: 'http-client-ip' = '127.0.0.1'
+  HDR: 'host' = '127.0.0.1:8080'
+  HDR: 'user-agent' = 'curl/8.7.1'
+  HDR: 'accept' = '*/*'
+GET '/' 
+  HDR: 'sec-fetch-mode' = 'navigate'
+  HDR: 'sec-fetch-site' = 'none'
+  HDR: 'accept-language' = 'en-US,en;q=0.9'
+  HDR: 'priority' = 'u=0, i'
+  HDR: 'accept' = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+  HDR: 'remote-addr' = '127.0.0.1'
+  HDR: 'http-client-ip' = '127.0.0.1'
+  HDR: 'host' = '127.0.0.1:8080'
+  HDR: 'upgrade-insecure-requests' = '1'
+  HDR: 'connection' = 'keep-alive'
+  HDR: 'accept-encoding' = 'gzip, deflate'
+  HDR: 'sec-fetch-dest' = 'document'
+  HDR: 'user-agent' = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1 Safari/605.1.15'
+GET '/index.js' 
+  HDR: 'sec-fetch-mode' = 'cors'
+  HDR: 'referer' = 'http://127.0.0.1:8080/'
+  HDR: 'sec-fetch-site' = 'same-origin'
+  HDR: 'accept-language' = 'en-US,en;q=0.9'
+  HDR: 'origin' = 'http://127.0.0.1:8080'
+  HDR: 'priority' = 'u=1, i'
+  HDR: 'accept' = '*/*'
+  HDR: 'remote-addr' = '127.0.0.1'
+  HDR: 'http-client-ip' = '127.0.0.1'
+  HDR: 'host' = '127.0.0.1:8080'
+  HDR: 'connection' = 'keep-alive'
+  HDR: 'accept-encoding' = 'gzip, deflate'
+  HDR: 'user-agent' = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1 Safari/605.1.15'
+  HDR: 'sec-fetch-dest' = 'script'
+GET '/wasm/index.wasm' 
+  HDR: 'sec-fetch-mode' = 'cors'
+  HDR: 'referer' = 'http://127.0.0.1:8080/'
+  HDR: 'sec-fetch-site' = 'same-origin'
+  HDR: 'accept-language' = 'en-US,en;q=0.9'
+  HDR: 'priority' = 'u=3, i'
+  HDR: 'accept' = '*/*'
+  HDR: 'remote-addr' = '127.0.0.1'
+  HDR: 'http-client-ip' = '127.0.0.1'
+  HDR: 'host' = '127.0.0.1:8080'
+  HDR: 'connection' = 'keep-alive'
+  HDR: 'accept-encoding' = 'gzip, deflate'
+  HDR: 'sec-fetch-dest' = 'empty'
+  HDR: 'user-agent' = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1 Safari/605.1.15'
+GET '/favicon.ico' 
+  HDR: 'sec-fetch-mode' = 'no-cors'
+  HDR: 'referer' = 'http://127.0.0.1:8080/'
+  HDR: 'sec-fetch-site' = 'same-origin'
+  HDR: 'accept-language' = 'en-US,en;q=0.9'
+  HDR: 'priority' = 'u=3, i'
+  HDR: 'accept' = '*/*'
+  HDR: 'remote-addr' = '127.0.0.1'
+  HDR: 'http-client-ip' = '127.0.0.1'
+  HDR: 'host' = '127.0.0.1:8080'
+  HDR: 'connection' = 'keep-alive'
+  HDR: 'accept-encoding' = 'gzip, deflate'
+  HDR: 'sec-fetch-dest' = 'image'
+  HDR: 'user-agent' = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1 Safari/605.1.15'
+^C%                                                                                                                                         rajaniapple@Rajanis-MacBook-Pro rajaniapple@Rajanis-MacBook-Pro wasmbrowser % jar tvf target/wasmbrowser-1.0.0.war
+     0 Tue Nov 12 16:19:14 IST 2024 META-INF/
+   137 Tue Nov 12 16:19:12 IST 2024 META-INF/MANIFEST.MF
+     0 Tue Nov 12 16:19:14 IST 2024 wasm/
+     0 Tue Nov 12 16:19:14 IST 2024 WEB-INF/
+     0 Tue Nov 12 16:19:14 IST 2024 WEB-INF/classes/
+     0 Tue Nov 12 16:19:14 IST 2024 WEB-INF/classes/META-INF/
+     0 Tue Nov 12 16:19:14 IST 2024 WEB-INF/classes/META-INF/nanohttpd/
+     0 Tue Nov 12 16:19:14 IST 2024 WEB-INF/classes/com/
+     0 Tue Nov 12 16:19:14 IST 2024 WEB-INF/classes/com/commons/
+     0 Tue Nov 12 16:19:14 IST 2024 WEB-INF/classes/com/commons/project/
+  5430 Wed Oct 23 00:00:00 IST 2019 favicon.ico
+   184 Tue Nov 12 16:15:50 IST 2024 index.html
+  3866 Tue Nov 12 16:19:14 IST 2024 wasm/index.wasm
+   510 Tue Nov 12 16:14:48 IST 2024 index.js
+    22 Tue Nov 12 16:19:14 IST 2024 WEB-INF/classes/META-INF/nanohttpd/mimetypes.properties
+   565 Tue Nov 12 16:19:14 IST 2024 WEB-INF/classes/com/commons/project/Client.class
+   338 Tue Nov 12 16:08:38 IST 2024 WEB-INF/web.xml
+  4115 Tue Nov 12 16:12:50 IST 2024 META-INF/maven/com.commons/wasmbrowser/pom.xml
+   107 Tue Nov 12 16:19:14 IST 2024 META-INF/maven/com.commons/wasmbrowser/pom.properties
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % export JAVA_HOME="$HOME/Downloads/Software/OpenJDK/JDK23.0.1/jdk-23.0.1.jdk/Contents/Home/"
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % java -version
+openjdk version "23.0.1" 2024-10-15
+OpenJDK Runtime Environment (build 23.0.1+11-39)
+OpenJDK 64-Bit Server VM (build 23.0.1+11-39, mixed mode, sharing)
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % ls $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps
+
+ROOT		docs		examples	host-manager	manager
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser % cd "$HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/bin"
+rajaniapple@Rajanis-MacBook-Pro bin % ./startup.sh
+Using CATALINA_BASE:   /Users/rajaniapple/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1
+Using CATALINA_HOME:   /Users/rajaniapple/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1
+Using CATALINA_TMPDIR: /Users/rajaniapple/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/temp
+Using JRE_HOME:        /Users/rajaniapple/Downloads/Software/OpenJDK/JDK23.0.1/jdk-23.0.1.jdk/Contents/Home/
+Using CLASSPATH:       /Users/rajaniapple/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/bin/bootstrap.jar:/Users/rajaniapple/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/bin/tomcat-juli.jar
+Using CATALINA_OPTS:   
+Tomcat started.
+rajaniapple@Rajanis-MacBook-Pro bin % open http://localhost:8080/
+rajaniapple@Rajanis-MacBook-Pro bin % ls $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps
+ROOT		docs		examples	host-manager	manager
+rajaniapple@Rajanis-MacBook-Pro bin % cp $HOME/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/wasmbrowser-1.0.0.war $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps
+rajaniapple@Rajanis-MacBook-Pro bin % ls $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps
+ROOT			examples		manager
+docs			host-manager		wasmbrowser-1.0.0.war
+rajaniapple@Rajanis-MacBook-Pro bin % open http://localhost:8080/wasmbrowser-1.0.0                       
+rajaniapple@Rajanis-MacBook-Pro bin % ./shutdown.sh             
+Using CATALINA_BASE:   /Users/rajaniapple/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1
+Using CATALINA_HOME:   /Users/rajaniapple/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1
+Using CATALINA_TMPDIR: /Users/rajaniapple/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/temp
+Using JRE_HOME:        /Users/rajaniapple/Downloads/Software/OpenJDK/JDK23.0.1/jdk-23.0.1.jdk/Contents/Home/
+Using CLASSPATH:       /Users/rajaniapple/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/bin/bootstrap.jar:/Users/rajaniapple/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/bin/tomcat-juli.jar
+Using CATALINA_OPTS:   
+rajaniapple@Rajanis-MacBook-Pro bin % ls $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps
+ROOT			examples		manager			wasmbrowser-1.0.0.war
+docs			host-manager		wasmbrowser-1.0.0
+rajaniapple@Rajanis-MacBook-Pro bin % rm -rf $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps/wasmbrowser-1.0.0.war
+rajaniapple@Rajanis-MacBook-Pro bin % ls $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps
+ROOT			examples		manager
+docs			host-manager		wasmbrowser-1.0.0
+rajaniapple@Rajanis-MacBook-Pro ~ % cd $HOME/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/wasmbrowser-1.0.0
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser-1.0.0 % npm --version
+10.9.0
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser-1.0.0 % http-server -p 8000
+Starting up http-server, serving ./
+
+http-server version: 14.1.1
+
+http-server settings: 
+CORS: disabled
+Cache: 3600 seconds
+Connection Timeout: 120 seconds
+Directory Listings: visible
+AutoIndex: visible
+Serve GZIP Files: false
+Serve Brotli Files: false
+Default File Extension: none
+
+Available on:
+  http://127.0.0.1:8000
+Hit CTRL-C to stop the server
+
+[Tue Nov 12 2024 16:55:21 GMT+0530 (India Standard Time)]  "GET /" "curl/8.7.1"
+(node:1278) [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[Tue Nov 12 2024 16:55:26 GMT+0530 (India Standard Time)]  "GET /wasm/index.wasm" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1 Safari/605.1.15"
+^Chttp-server stopped.
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser-1.0.0 % python3 --version
+Python 3.13.0
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser-1.0.0 % python3 -m http.server 8000
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+::ffff:127.0.0.1 - - [12/Nov/2024 16:56:06] "GET / HTTP/1.1" 200 -
+^C
+Keyboard interrupt received, exiting.
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser-1.0.0 % jwebserver --port 8000  
+zsh: command not found: jwebserver
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser-1.0.0 % java --version
+openjdk 23.0.1 2024-10-15
+OpenJDK Runtime Environment (build 23.0.1+11-39)
+OpenJDK 64-Bit Server VM (build 23.0.1+11-39, mixed mode, sharing)
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser-1.0.0 % jwebserver --port 8000  
+Binding to loopback by default. For all interfaces use "-b 0.0.0.0" or "-b ::".
+Serving /Users/rajaniapple/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/wasmbrowser-1.0.0 and subdirectories on 127.0.0.1 port 8000
+URL http://127.0.0.1:8000/
+127.0.0.1 - - [12/Nov/2024:16:57:51 +0530] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2024:16:57:54 +0530] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2024:16:57:54 +0530] "GET /index.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2024:16:57:54 +0530] "GET /wasm/index.wasm HTTP/1.1" 200 -
+127.0.0.1 - - [12/Nov/2024:16:57:54 +0530] "GET /favicon.ico HTTP/1.1" 200 -
+^C%                                                                                                                                         rajaniapple@Rajanis-MacBook-Pro wasmbrowser-1.0.0 % ruby -run -e httpd . -p 8000
+[2024-11-12 16:58:03] INFO  WEBrick 1.9.0
+[2024-11-12 16:58:03] INFO  ruby 3.3.6 (2024-11-05) [arm64-darwin24]
+[2024-11-12 16:58:03] INFO  WEBrick::HTTPServer#start: pid=1372 port=8000
+[2024-11-12 16:58:03] INFO  To access this server, open this URL in a browser:
+[2024-11-12 16:58:03] INFO      http://[::1]:8000
+[2024-11-12 16:58:03] INFO      http://127.0.0.1:8000
+127.0.0.1 - - [12/Nov/2024:16:58:07 IST] "GET / HTTP/1.1" 200 184
+- -> /
+^C[2024-11-12 16:58:20] INFO  going to shutdown ...
+[2024-11-12 16:58:20] INFO  WEBrick::HTTPServer#start done.
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser-1.0.0 % php --version 
+PHP 8.3.13 (cli) (built: Oct 22 2024 18:39:14) (NTS)
+Copyright (c) The PHP Group
+Zend Engine v4.3.13, Copyright (c) Zend Technologies
+    with Zend OPcache v8.3.13, Copyright (c), by Zend Technologies
+rajaniapple@Rajanis-MacBook-Pro wasmbrowser-1.0.0 % php -S 127.0.0.1:8000
+[Tue Nov 12 16:58:40 2024] PHP 8.3.13 Development Server (http://127.0.0.1:8000) started
+[Tue Nov 12 16:58:43 2024] 127.0.0.1:49169 Accepted
+[Tue Nov 12 16:58:43 2024] 127.0.0.1:49169 [200]: GET /
+[Tue Nov 12 16:58:43 2024] 127.0.0.1:49169 Closing
+[Tue Nov 12 16:58:46 2024] 127.0.0.1:49170 Accepted
+^C%                                                                                                                                         rajaniapple@Rajanis-MacBook-Pro wasmbrowser-1.0.0 % 

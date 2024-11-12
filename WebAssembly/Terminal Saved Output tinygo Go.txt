@@ -1,0 +1,136 @@
+Last login: Mon Nov 11 01:29:39 on ttys000
+rajaniapple@Rajanis-MacBook-Pro ~ % sw_vers
+ProductName:		macOS
+ProductVersion:		15.1
+BuildVersion:		24B83
+rajaniapple@Rajanis-MacBook-Pro ~ % arch
+arm64
+rajaniapple@Rajanis-MacBook-Pro ~ % brew update
+==> Updating Homebrew...
+Already up-to-date.
+rajaniapple@Rajanis-MacBook-Pro ~ % cd $HOME/Desktop/GitHub/Auxiliary-Add/WebAssembly    
+rajaniapple@Rajanis-MacBook-Pro WebAssembly % mkdir -p Go
+rajaniapple@Rajanis-MacBook-Pro WebAssembly % cd Go
+rajaniapple@Rajanis-MacBook-Pro Go % nano index.go
+rajaniapple@Rajanis-MacBook-Pro Go % cat index.go
+package main
+
+import "fmt"
+import "runtime"
+
+// % go run ./index.go % tinygo run ./index.go
+func main() {
+    fmt.Println("Runtime Version: " + runtime.Version());
+    fmt.Printf("Math: 5 x 7 = %d\n", math(5, 7));
+}
+
+// Comment "export math" to make the func callable from JavaScript
+//export math
+func math(x int, y int) int {
+  return x * y;
+}
+rajaniapple@Rajanis-MacBook-Pro Go % go version
+go version go1.23.3 darwin/arm64
+rajaniapple@Rajanis-MacBook-Pro Go % tinygo version
+tinygo version 0.34.0 darwin/arm64 (using go version go1.23.3 and LLVM version 18.1.2)
+rajaniapple@Rajanis-MacBook-Pro Go % go run ./index.go
+Runtime Version: go1.23.3
+Math: 5 x 7 = 35
+rajaniapple@Rajanis-MacBook-Pro Go % tinygo run ./index.go
+Runtime Version: 0.34.0
+Math: 5 x 7 = 35
+rajaniapple@Rajanis-MacBook-Pro Go % tinygo build -o index.wasm -target wasm ./index.go
+rajaniapple@Rajanis-MacBook-Pro Go % ls
+index.go	index.wasm
+rajaniapple@Rajanis-MacBook-Pro Go % ls $(tinygo env TINYGOROOT)/targets/wasm_exec.js
+/opt/homebrew/Cellar/tinygo/0.34.0/targets/wasm_exec.js
+rajaniapple@Rajanis-MacBook-Pro Go % cp $(tinygo env TINYGOROOT)/targets/wasm_exec.js .
+rajaniapple@Rajanis-MacBook-Pro Go % ls
+index.go	index.wasm	wasm_exec.js
+rajaniapple@Rajanis-MacBook-Pro Go % nano index.js
+rajaniapple@Rajanis-MacBook-Pro Go % cat index.js
+export const wasm = async (source, importObject) => {
+  let response = undefined;
+
+  if (WebAssembly.instantiateStreaming) {
+    response = await WebAssembly.instantiateStreaming(
+      fetch(source),
+      importObject
+    );
+  } else {
+    const fetchThenInstantiate = async () => {
+      const buffer = await fetch(source).then(response =>
+        response.arrayBuffer()
+      );
+      return WebAssembly.instantiate(buffer, importObject);
+    };
+
+    response = await fetchThenInstantiate();
+  }
+
+  return response;
+};
+
+const wasmFunc = async () => {
+  const go = new Go();
+  const importObject = go.importObject;
+
+  const module = await wasm("./index.wasm", importObject);
+
+  go.run(module.instance);
+
+  const x = 5;
+  const y = 7;
+  const result = module.instance.exports.math(5, 7);
+
+  document.body.innerHTML = `Browser: ${navigator.userAgent} <br\><br\> Math: ${x} x ${y} = ${result}`;
+};
+
+wasmFunc();
+rajaniapple@Rajanis-MacBook-Pro Go % nano index.html
+rajaniapple@Rajanis-MacBook-Pro Go % cat index.html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Go WebAssembly</title>
+  </head>
+  <body>
+    <script src="./wasm_exec.js"></script>
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>
+rajaniapple@Rajanis-MacBook-Pro Go % npm --version
+10.9.0
+rajaniapple@Rajanis-MacBook-Pro Go % http-server -p 8000
+Starting up http-server, serving ./
+
+http-server version: 14.1.1
+
+http-server settings: 
+CORS: disabled
+Cache: 3600 seconds
+Connection Timeout: 120 seconds
+Directory Listings: visible
+AutoIndex: visible
+Serve GZIP Files: false
+Serve Brotli Files: false
+Default File Extension: none
+
+Available on:
+  http://127.0.0.1:8000
+  http://192.168.251.196:8000
+Hit CTRL-C to stop the server
+
+[Mon Nov 11 2024 01:35:02 GMT+0530 (India Standard Time)]  "GET /" "curl/8.7.1"
+(node:14621) [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
+(Use `node --trace-deprecation ...` to show where the warning was created)
+^Chttp-server stopped.
+rajaniapple@Rajanis-MacBook-Pro Go % python3 --version
+Python 3.13.0
+rajaniapple@Rajanis-MacBook-Pro Go % python3 -m http.server 8000
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+::ffff:127.0.0.1 - - [11/Nov/2024 01:36:01] "GET / HTTP/1.1" 200 -
+^C
+Keyboard interrupt received, exiting.
+rajaniapple@Rajanis-MacBook-Pro Go % 

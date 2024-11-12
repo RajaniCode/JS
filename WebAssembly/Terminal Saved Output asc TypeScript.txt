@@ -1,0 +1,124 @@
+Last login: Sun Nov 10 23:24:02 on ttys000
+rajaniapple@Rajanis-MacBook-Pro ~ % sw_vers                                          
+ProductName:		macOS
+ProductVersion:		15.1
+BuildVersion:		24B83
+rajaniapple@Rajanis-MacBook-Pro ~ % arch                                             
+arm64
+rajaniapple@Rajanis-MacBook-Pro ~ % brew update                                      
+==> Updating Homebrew...
+Already up-to-date.
+rajaniapple@Rajanis-MacBook-Pro ~ % cd $HOME/Desktop/GitHub/Auxiliary-Add/WebAssembly
+rajaniapple@Rajanis-MacBook-Pro WebAssembly % mkdir -p TypeScript
+rajaniapple@Rajanis-MacBook-Pro WebAssembly % cd TypeScript
+rajaniapple@Rajanis-MacBook-Pro TypeScript % nano index.ts
+rajaniapple@Rajanis-MacBook-Pro TypeScript % cat index.ts
+export function math(x: i32, y: i32): i32 {
+  return x * y;
+}
+rajaniapple@Rajanis-MacBook-Pro TypeScript % npm install -g assemblyscript
+(node:4876) ExperimentalWarning: CommonJS module /opt/homebrew/lib/node_modules/npm/node_modules/debug/src/node.js is loading ES Module /opt/homebrew/lib/node_modules/npm/node_modules/supports-color/index.js using require().
+Support for loading ES Module in require() is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+added 3 packages in 3s
+
+1 package is looking for funding
+  run `npm fund` for details
+rajaniapple@Rajanis-MacBook-Pro TypeScript % asc --version
+Version 0.27.30
+rajaniapple@Rajanis-MacBook-Pro TypeScript % asc index.ts -o index.wasm
+rajaniapple@Rajanis-MacBook-Pro TypeScript % nano index.js
+rajaniapple@Rajanis-MacBook-Pro TypeScript % cat index.js
+export const wasm = async (source, importObject) => {
+  let response = undefined;
+
+  if (!importObject) {
+    importObject = { imported_func: { arg: () => console.log(arg) },
+    };
+  }
+
+  if (WebAssembly.instantiateStreaming) {
+    response = await WebAssembly.instantiateStreaming(
+      fetch(source),
+      importObject
+    );
+  } else {
+    const fetchThenInstantiate = async () => {
+      const buffer = await fetch(source).then(response =>
+        response.arrayBuffer()
+      );
+      return WebAssembly.instantiate(buffer, importObject);
+    };
+    response = await fetchThenInstantiate();
+  }
+
+  return response;
+};
+
+const wasmFunc = async () => {
+  const module = await wasm("./index.wasm");
+
+  const x = 5;
+  const y = 7;
+  const result = module.instance.exports.math(5, 7);
+
+  document.body.innerHTML = `Browser: ${navigator.userAgent} <br\><br\> Math: ${x} x ${y} = ${result}`;
+};
+
+wasmFunc();
+rajaniapple@Rajanis-MacBook-Pro TypeScript % nano index.html
+rajaniapple@Rajanis-MacBook-Pro TypeScript % cat index.html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>TypeScript WebAssembly</title>
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body></body>
+</html>
+rajaniapple@Rajanis-MacBook-Pro TypeScript % wget https://www.google.com/favicon.ico
+--2024-11-10 23:27:37--  https://www.google.com/favicon.ico
+Resolving www.google.com (www.google.com)... 2404:6800:4007:81f::2004, 142.250.192.4
+Connecting to www.google.com (www.google.com)|2404:6800:4007:81f::2004|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 5430 (5.3K) [image/x-icon]
+Saving to: ‘favicon.ico’
+
+favicon.ico                        100%[================================================================>]   5.30K  --.-KB/s    in 0.001s  
+
+2024-11-10 23:27:37 (8.07 MB/s) - ‘favicon.ico’ saved [5430/5430]
+
+rajaniapple@Rajanis-MacBook-Pro TypeScript % http-server -p 8000
+Starting up http-server, serving ./
+
+http-server version: 14.1.1
+
+http-server settings: 
+CORS: disabled
+Cache: 3600 seconds
+Connection Timeout: 120 seconds
+Directory Listings: visible
+AutoIndex: visible
+Serve GZIP Files: false
+Serve Brotli Files: false
+Default File Extension: none
+
+Available on:
+  http://127.0.0.1:8000
+  http://192.168.251.196:8000
+Hit CTRL-C to stop the server
+
+[Sun Nov 10 2024 23:46:14 GMT+0530 (India Standard Time)]  "GET /" "curl/8.7.1"
+(node:5599) [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
+(Use `node --trace-deprecation ...` to show where the warning was created)
+^Chttp-server stopped.
+rajaniapple@Rajanis-MacBook-Pro TypeScript % python3 --version          
+Python 3.13.0
+rajaniapple@Rajanis-MacBook-Pro TypeScript % python3 -m http.server 8000
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+::ffff:127.0.0.1 - - [10/Nov/2024 23:47:24] "GET / HTTP/1.1" 200 -
+^C
+Keyboard interrupt received, exiting.
+rajaniapple@Rajanis-MacBook-Pro TypeScript % 
