@@ -21,6 +21,8 @@ JavaScript
 
 - jQuery
 
+- WebAssembly
+
 Credits
 -------
 [![image](
@@ -108,6 +110,8 @@ Credits/Fleet-jetbrains.com.svg)](https://jetbrains.com/fleet/)
 Credits/WebStorm-jetbrains.com.svg)](https://jetbrains.com/webstorm/)-->  
 [![image](
 Credits/stripe.com.svg)](https://stripe.com/)  
+[![image](
+Credits/webassembly.org.svg)](https://webassembly.org/)  
 [![image](
 Credits/JavaScript-static-code-analysis-rules.sonarsource.com.svg)](https://rules.sonarsource.com/javascript/)  
 [![image](
