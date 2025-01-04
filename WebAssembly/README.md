@@ -51,6 +51,8 @@ Credits/python.org.svg)](https://python.org/)
 [![image](
 Credits/pypi.org.svg)](https://pypi.org/)  
 [![image](
+Credits/pyodide.org.svg)](https://pyodide.org/)  
+[![image](
 Credits/nodejs.org.svg)](https://nodejs.org/)  
 [![image](
 Credits/npmjs.com.svg)](https://npmjs.com/)  
