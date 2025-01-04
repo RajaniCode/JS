@@ -703,7 +703,9 @@ wasmFunc();
 % wget https://cdn.jsdelivr.net/pyodide/v0.27.0/full/pyodide.js --directory-prefix=CDN
 ===========================================================================================================================
 
-# Download a version of Pyodide from the releases page and serve it with a web server.
+===========================================================================================================================
+# Pyodide
+===========================================================================================================================
 [
 % cd $HOME
 ]
@@ -1048,7 +1050,7 @@ export function math(x, y) {
 ===========================================================================================================================
 
 ===========================================================================================================================
-# Node.js # dotnet # wasmconsole
+# CS # Node.js # dotnet # wasmconsole
 ===========================================================================================================================
 [
 % cd $HOME
@@ -1382,7 +1384,7 @@ rand.to_f # => 0.123456789
 
 % gem --version
 
-$ gem install ruby_wasm
+% gem install ruby_wasm
 
 # Download a prebuilt Ruby release
 % curl -LO https://github.com/ruby/ruby.wasm/releases/latest/download/ruby-3.3-wasm32-unknown-wasip1-full.tar.gz
@@ -1423,7 +1425,7 @@ Ruby: ruby 3.3.3 (2024-06-12 revision f1c7b6f435) [wasm32-wasi]
 ===========================================================================================================================
 
 ===========================================================================================================================
-# Node.js
+# Ruby # Node.js
 ===========================================================================================================================
 % mkdir -p NodeJS
 
@@ -1481,9 +1483,9 @@ Math: 5 x 7 = 35
 % cd Java
 
 [
-// Java 23
-// OpenJDK 23
-// Apache Maven 3.9.9
+# Java 23
+# OpenJDK 23
+# Apache Maven 3.9.9
 % export JAVA_HOME="$HOME/Downloads/Software/OpenJDK/JDK23.0.1/jdk-23.0.1.jdk/Contents/Home"
 % export M2_HOME="$HOME/Downloads/Software/ApacheMaven/apache-maven-3.9.9"
 % export M2="$M2_HOME/bin"
@@ -1556,8 +1558,9 @@ Math: 5 x 7 = 35
 
 ]
 
-// Java 8
-// JDK 8 
+# Java 8
+# JDK 8 
+# Apache Maven 3.9.9
 % export PATH="$HOME/Downloads/Software/JDK/JDK8/jdk1.8.0_401.jdk//Contents/Home//bin/:$HOME/Downloads/Software/ApacheMaven/apache-maven-3.9.9/bin/":$PATH
 
 % java -version
@@ -1920,8 +1923,7 @@ cd $HOME
 % open http://127.0.0.1:8000
 ===========================================================================================================================
 ***************************************************************************************************************************
-
-
+###########################################################################################################################
 
 
 // Credits
@@ -1933,16 +1935,17 @@ https://typescriptlang.org/
 https://tinygo.org/
 https://go.dev/
 https://rust-lang.org/
-https://dotnet.microsoft.com/
-https://openjdk.org/
-https://oracle.com/java/
-https://ruby-lang.org/
-https://rubygems.org/
+https://nodejs.org/
+https://npmjs.com/
 https://python.org/
 https://pypi.org/
 https://pyodide.org/
-https://nodejs.org/
-https://npmjs.com/
+https://openjdk.org/
+https://oracle.com/java/
+https://microsoft.com/
+https://dotnet.microsoft.com/
+https://ruby-lang.org/
+https://rubygems.org/
 https://php.net/
 https://gcc.gnu.org/
 https://developer.mozilla.org/
