@@ -1,7 +1,7 @@
 JavaScript
 ----------
 
-- JavaScript
+- WebAssembly
 
 - Node.js
 
@@ -18,10 +18,6 @@ JavaScript
 - Ember.js
 
 - Knockout.js
-
-- jQuery
-
-- WebAssembly
 
 Credits
 -------
