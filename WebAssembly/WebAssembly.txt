@@ -992,7 +992,7 @@ export function math(x, y) {
 ]
 % dotnet publish
 
-% cd $(pwd)/bin/Release/net9.0/publish/wwwroot
+% cd bin/Release/net9.0/publish/wwwroot
 
 ===========================================================================================================================
 # HTTP Server
@@ -1929,11 +1929,20 @@ cd $HOME
 // Credits
 /*
 https://webassembly.org/
+https://wasi.dev/
+https://wasmtime.dev/
+https://w3.org/
+https://developer.mozilla.org/
 https://emscripten.org/
 https://assemblyscript.org/
 https://typescriptlang.org/
-https://tinygo.org/
+https://swift.org/
+https://developer.apple.com/
+https://swiftwasm.org/
 https://go.dev/
+https://tinygo.org/
+https://developers.google.com/
+https://web.dev/
 https://rust-lang.org/
 https://nodejs.org/
 https://npmjs.com/
@@ -1942,14 +1951,15 @@ https://pypi.org/
 https://pyodide.org/
 https://openjdk.org/
 https://oracle.com/java/
-https://microsoft.com/
 https://dotnet.microsoft.com/
+https://developer.microsoft.com/
 https://ruby-lang.org/
 https://rubygems.org/
 https://php.net/
 https://gcc.gnu.org/
-https://developer.mozilla.org/
 https://maven.apache.org/
 https://gradle.org/
-https://toml.io/en/
+https://toml.io/
+https://docs.wasmtime.dev/
+https://book.swiftwasm.org/
 */
