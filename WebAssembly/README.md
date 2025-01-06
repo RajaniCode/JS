@@ -17,6 +17,8 @@ WebAssembly
 
 - C#
 
+- F#
+
 - Node.js
 
 - Ruby
@@ -80,6 +82,12 @@ Credits/CS.NET-dotnet.microsoft.com.svg)](https://dotnet.microsoft.com/)
 [![image](
 Credits/CS-dotnet.microsoft.com.svg)](https://dotnet.microsoft.com/languages/csharp/)  
 [![image](
+Credits/fsharp.org.svg)](https://fsharp.org/)  
+[![image](
+Credits/foundation.fsharp.org.svg)](https://foundation.fsharp.org/)  
+[![image](
+Credits/fsbolero.io.svg)](https://fsbolero.io/)  
+[![image](
 Credits/Blazor-dotnet.microsoft.com.svg)](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor/)<!--[![image](
 Credits/dotnet.microsoft.com.svg)](https://dotnet.microsoft.com/)-->  
 [![image](
@@ -115,5 +123,7 @@ Credits/GoLand-jetbrains.com.svg)](https://jetbrains.com/go/)
 Credits/RustRover-jetbrains.com.svg)](https://jetbrains.com/rust/)  
 [![image](
 Credits/bytecodealliance.org.svg)](https://bytecodealliance.org/)  
+[![image](
+Credits/elmish.github.io.svg)](https://elmish.github.io/)  
 [![image](
 Credits/tokamak.dev.svg)](https://tokamak.dev/)-->

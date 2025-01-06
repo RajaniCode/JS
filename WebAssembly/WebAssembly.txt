@@ -1361,6 +1361,100 @@ Hello, Console!
 
 ***************************************************************************************************************************
 
+# FS # dotnet # Bolero
+
+***************************************************************************************************************************
+[
+% cd $HOME/Desktop/GitHub/JavaScript-1/WebAssembly
+]
+
+% mkdir -p FS
+
+% cd FS
+
+% dotnet --version
+
+# Creating a project
+[
+% sudo dotnet new -i Bolero.Templates
+]
+% sudo dotnet new install Bolero.Templates
+
+[
+% sudo dotnet workload update
+]
+
+[
+% sudo dotnet new bolero-app -o FSWebAssembly
+]
+% sudo dotnet new bolero-app -o FSWebAssembly --force
+
+% ls
+
+% cd FSWebAssembly
+
+[
+% sudo dotnet run --project src/FSWebAssembly.Server
+]
+# The ASP.NET Core developer certificate is in an invalid state. To fix this issue, run 'dotnet dev-certs https --clean' and 'dotnet dev-certs https' to remove all existing ASP.NET Core development certificates and create a new untrusted developer certificate. On macOS or Windows, use 'dotnet dev-certs https --trust' to trust the new certificate.
+[
+% sudo dotnet dev-certs https --trust
+]
+% sudo dotnet dev-certs https --clean
+
+% sudo dotnet dev-certs https
+
+% sudo dotnet dev-certs https --trust
+
+% sudo dotnet run --project src/FSWebAssembly.Server
+===========================================================================================================================
+
+===========================================================================================================================
+# Terminal New Window # http(s) # curl # wget # open
+===========================================================================================================================
+---------------------------------------------------------------------------------------------------------------------------
+# https
+---------------------------------------------------------------------------------------------------------------------------
+# curl: (60) SSL certificate problem: unable to get local issuer certificate
+# More details here: https://curl.se/docs/sslcerts.html
+# -k
+% curl -k https://localhost:44303/
+
+# ERROR: cannot verify localhost's certificate, issued by ‘CN=localhost’:
+#  Self-signed certificate encountered.
+# To connect to localhost insecurely, use `--no-check-certificate'.
+# --no-check-certificate
+% wget -S -O - https://localhost:44303/ --no-check-certificate
+
+% open https://localhost:44303/
+---------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------
+# http
+---------------------------------------------------------------------------------------------------------------------------
+% curl http://localhost:5015/
+% wget -S -O - http://localhost:5015/
+% open http://localhost:5015/
+---------------------------------------------------------------------------------------------------------------------------
+===========================================================================================================================
+
+# Browser
+# https://localhost:44303/ # http://localhost:5015/
+# Sign in
+[
+Username: fsharp
+Password: password
+]
+sign in
+
+# Click Reload
+# Sign out
+
+***************************************************************************************************************************
+
+
+***************************************************************************************************************************
+
 # Ruby # WASI # ruby.wasm # wasmtime # Node.js
 
 ***************************************************************************************************************************
@@ -2214,6 +2308,9 @@ https://pypi.org/
 https://pyodide.org/
 https://dotnet.microsoft.com/
 https://developer.microsoft.com/
+https://fsharp.org/
+https://foundation.fsharp.org/
+https://fsbolero.io/
 https://nodejs.org/
 https://npmjs.com/
 https://ruby-lang.org/
