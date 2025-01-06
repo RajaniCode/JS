@@ -313,6 +313,271 @@ wasmFunc();
 
 ***************************************************************************************************************************
 
+# Swift
+
+***************************************************************************************************************************
+[
+% cd $HOME/Desktop/GitHub/JavaScript-1/WebAssembly
+]
+
+% mkdir -p Swift
+
+% cd Swift
+
+% swift --version
+
+% swiftc --version
+
+## Installation
+# Swift Toolchain # pkg
+# Download the appropriate Swift toolchain version from swift.org/install 
+# swift-5.10-RELEASE-osx.pkg
+
+[
+# Debugging Symbols # pkg
+# swift-5.10-RELEASE-osx-symbols.pkg
+]
+
+% swift --version
+
+% swiftc --version
+
+# Run the package installer, which will install an Xcode toolchain into /Library/Developer/Toolchains/
+% ls /Library/Developer/Toolchains
+[
+swift-5.10-RELEASE.xctoolchain	swift-latest.xctoolchain
+]
+
+# rm Toolchains
+[
+% sudo rm -rf /Library/Developer/Toolchains/*
+]
+
+# NB
+[
+# An Xcode toolchain (.xctoolchain) includes a copy of the compiler, LLDB, and other related tools needed to provide a cohesive development experience for working in a specific version of Swift
+
+# To select the installed toolchain in Xcode, navigate to Xcode > Toolchains.
+
+# Xcode uses the selected toolchain for building Swift code, debugging, and even code completion and syntax coloring. You’ll see a new toolchain indicator in Xcode’s toolbar when Xcode is using an installed toolchain. Select the default toolchain to go back to Xcode’s built-in tools.
+
+# Selecting a toolchain in Xcode affects the IDE only. To use the installed toolchain with xcrun, pass the --toolchain swift option. For example:
+
+% xcrun --toolchain swift swift --version
+
+# xcodebuild, pass the -toolchain swift option.
+
+# Alternatively, you may select the toolchain on the command line by exporting the TOOLCHAINS environment variable as follows:
+
+% export TOOLCHAINS=$(plutil -extract CFBundleIdentifier raw /Library/Developer/Toolchains/<toolchain name>.xctoolchain/Info.plist)
+]
+
+[
+% xcrun --version
+
+% xcrun --toolchain swift swift --version
+]
+
+% ls -l `which swift`
+% ls /usr/bin/
+[
+% ls /usr/bin/swift
+% ls /usr/bin/swift-inspect
+% ls /usr/bin/swiftc
+]
+
+## Swift SDK for WebAssembly # Cross compile to WebAssembly
+# Match the Swift Toolchain Version # swift-5.10-RELEASE # swift-wasm-5.10.0-RELEASE
+# Install Swift SDKs for WebAssembly 
+% wget https://github.com/swiftwasm/swift/releases/download/swift-wasm-5.10.0-RELEASE/swift-wasm-5.10.0-RELEASE-macos_arm64.artifactbundle.zip
+% swift sdk install swift-wasm-5.10.0-RELEASE-macos_arm64.artifactbundle.zip
+
+% swift sdk list
+[
+5.10.0-RELEASE-wasm
+]
+
+# swift sdk remove
+[
+% swift sdk remove 5.10.0-RELEASE-wasm
+
+% swift sdk list
+]
+
+# Run the package installer, which will install an Xcode toolchain into /Library/Developer/Toolchains/
+% ls /Library/Developer/Toolchains
+[
+swift-5.10-RELEASE.xctoolchain	swift-latest.xctoolchain
+]
+
+# Swift file
+% nano sample.swift
+[
+#if os(macOS)
+print("macOS")
+#elseif os(iOS)
+print("iOS")
+#elseif os(watchOS)
+print("watchOS")
+#elseif os(tvOS)
+print("tvOS")
+#endif
+
+#if swift(>=5.0)
+print("Swift >= 5.0")
+#else
+print("Swift < 5.0")
+#endif
+
+print("[1, 3, 5, 7].reduce(0, +) = \([1, 3, 5, 7].reduce(0, +))")
+
+print("[1, 3, 5, 7].reduce(1, *) = \([1, 3, 5, 7].reduce(1, *))")
+]
+
+% cat sample.swift
+
+% swift sample.swift
+
+## Terminal New Window # SwiftWasm
+[
+% cd $HOME
+]
+# SwiftWasm Toolchain Installation # pkg
+% wget https://github.com/swiftwasm/swift/releases/download/swift-wasm-5.10.0-RELEASE/swift-wasm-5.10.0-RELEASE-macos_arm64.pkg
+[
+% curl -L -o swift-wasm-5.10.0-RELEASE-macos_arm64.pkg https://github.com/swiftwasm/swift/releases/download/swift-wasm-5.10.0-RELEASE/swift-wasm-5.10.0-RELEASE-macos_arm64.pkg
+]
+# swift-wasm-5.10.0-RELEASE-macos_arm64.pkg
+
+# Run the package installer, which will install an Xcode toolchain into /Library/Developer/Toolchains/
+% ls /Library/Developer/Toolchains
+[
+swift-5.10-RELEASE.xctoolchain		swift-latest.xctoolchain		swift-wasm-5.10.0-RELEASE.xctoolchain
+]
+
+% swift --version
+[
+swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+]
+
+% swiftc --version
+[
+swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+]
+
+# export swift-wasm Toolchain
+% export PATH="/Library/Developer/Toolchains/swift-wasm-5.10.0-RELEASE.xctoolchain/usr/bin/":$PATH
+
+% swift --version
+[
+SwiftWasm Swift version 5.10-dev (LLVM e98989b1092ff3a, Swift 23e8e340a7a32a7)
+]
+
+% swiftc --version
+[
+SwiftWasm Swift version 5.10-dev (LLVM e98989b1092ff3a, Swift 23e8e340a7a32a7)
+]
+
+# Compile Swift code into WebAssembly with WASI
+% swiftc -target wasm32-unknown-wasi sample.swift -o sample.wasm
+
+# Run the produced binary on WebAssembly runtime
+[
+% wget https://wasmtime.dev/install.sh
+]
+% curl https://wasmtime.dev/install.sh -sSf | bash
+[
+...
+     Editing user profile (/Users/rajaniapple/.zshrc)
+    Finished installation. Open a new terminal to start using Wasmtime!
+]
+
+% cat /Users/rajaniapple/.zshrc
+[
+...
+export WASMTIME_HOME="$HOME/.wasmtime"
+
+export PATH="$WASMTIME_HOME/bin:$PATH"
+]
+
+## Terminal New Window # wasmtime
+[
+% cd $HOME
+]
+
+% wasmtime --version
+
+% wasmtime sample.wasm
+
+## SwiftPM package to WebAssembly
+# Terminal New Window # SwiftPM # SwiftWasm
+[
+% cd $HOME
+]
+
+% mkdir -p SwiftWasm
+
+% cd SwiftWasm
+
+# export swift-wasm Toolchain
+% export PATH="/Library/Developer/Toolchains/swift-wasm-5.10.0-RELEASE.xctoolchain/usr/bin/":$PATH
+
+# Create a package from template
+% swift --version
+[
+SwiftWasm Swift version 5.10-dev (LLVM e98989b1092ff3a, Swift 23e8e340a7a32a7)
+Target: arm64-apple-darwin24.1.0
+]
+% swift package init --type executable --name Sample 
+
+# Build the Project into a WebAssembly binary # SwiftPM # SwiftWasm
+# --triple option, which indicates that you are building for the target
+% swift build --triple wasm32-unknown-wasi
+
+# Run the produced binary
+% wasmtime --version
+
+% wasmtime ./.build/wasm32-unknown-wasi/debug/Sample.wasm
+[
+Hello, world!
+]
+
+## SwiftPM package to WebAssembly
+# Terminal New Window # SwiftPM # Swift SDK # Swift
+[
+% cd $HOME
+]
+
+% mkdir -p SwiftSDK
+
+% cd SwiftSDK
+
+# Create a package from template
+% swift --version
+[
+swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+Target: arm64-apple-macosx15.0
+]
+
+# Build the Project into a WebAssembly binary  # SwiftPM # Swift SDK # Swift
+% swift package init --type executable --name Sample 
+
+# When Swift SDK is installed
+# swift build --swift-sdk <SDK name>
+% swift build --swift-sdk 5.10.0-RELEASE-wasm
+
+# Run the produced binary
+% wasmtime --version
+
+% wasmtime ./.build/wasm32-unknown-wasi/debug/Sample.wasm
+[
+Hello, world!
+]
+***************************************************************************************************************************
+
+
+***************************************************************************************************************************
+
 # Go # tinygo
 
 ***************************************************************************************************************************
@@ -1944,17 +2209,17 @@ https://tinygo.org/
 https://developers.google.com/
 https://web.dev/
 https://rust-lang.org/
-https://nodejs.org/
-https://npmjs.com/
 https://python.org/
 https://pypi.org/
 https://pyodide.org/
-https://openjdk.org/
-https://oracle.com/java/
 https://dotnet.microsoft.com/
 https://developer.microsoft.com/
+https://nodejs.org/
+https://npmjs.com/
 https://ruby-lang.org/
 https://rubygems.org/
+https://openjdk.org/
+https://oracle.com/java/
 https://php.net/
 https://gcc.gnu.org/
 https://maven.apache.org/

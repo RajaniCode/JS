@@ -7,11 +7,19 @@ WebAssembly
 
 - TypeScript
 
+- Swift
+
 - Go
 
 - Rust
 
+- Python
+
 - C#
+
+- Node.js
+
+- Ruby
 
 - Java
 
@@ -106,6 +114,6 @@ Credits/GoLand-jetbrains.com.svg)](https://jetbrains.com/go/)
 [![image](
 Credits/RustRover-jetbrains.com.svg)](https://jetbrains.com/rust/)  
 [![image](
-Credits/tokamak.dev.svg)](https://tokamak.dev/)  
+Credits/bytecodealliance.org.svg)](https://bytecodealliance.org/)  
 [![image](
-Credits/bytecodealliance.org.svg)](https://bytecodealliance.org/)-->
+Credits/tokamak.dev.svg)](https://tokamak.dev/)-->
