@@ -5,6 +5,8 @@ WebAssembly
 
 - C
 
+- Node.js
+
 - TypeScript
 
 - Swift
@@ -18,8 +20,6 @@ WebAssembly
 - C#
 
 - F#
-
-- Node.js
 
 - Ruby
 
@@ -40,9 +40,13 @@ Credits/developer.mozilla.org.svg)](https://developer.mozilla.org/)
 [![image](
 Credits/emscripten.org.svg)](https://emscripten.org/)  
 [![image](
-Credits/assemblyscript.org.svg)](https://assemblyscript.org/)  
+Credits/nodejs.org.svg)](https://nodejs.org/)  
+[![image](
+Credits/npmjs.com.svg)](https://npmjs.com/)  
 [![image](
 Credits/typescriptlang.org.svg)](https://typescriptlang.org/)  
+[![image](
+Credits/assemblyscript.org.svg)](https://assemblyscript.org/)  
 [![image](
 Credits/swift.org.svg)](https://swift.org/)  
 [![image](
@@ -63,10 +67,6 @@ Credits/developers.google.com.svg)](https://developers.google.com/)
 Credits/web.dev.svg)](https://web.dev/)  
 [![image](
 Credits/rust-lang.org.svg)](https://rust-lang.org/)  
-[![image](
-Credits/nodejs.org.svg)](https://nodejs.org/)  
-[![image](
-Credits/npmjs.com.svg)](https://npmjs.com/)  
 [![image](
 Credits/python.org.svg)](https://python.org/)  
 [![image](

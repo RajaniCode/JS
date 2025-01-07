@@ -5,7 +5,7 @@
 ###########################################################################################################################
 ***************************************************************************************************************************
 
-# emsdk
+# Emscripten # WebAssembly (Wasm) # emsdk # emcc # Node.js # HTML
 
 ***************************************************************************************************************************
 [
@@ -101,7 +101,7 @@ int main() {
 
 ***************************************************************************************************************************
 
-# C # emcc
+# C # WebAssembly (wasm) # Emscripten # emcc # Node.js # HTML
 
 ***************************************************************************************************************************
 % brew install emscripten
@@ -187,7 +187,7 @@ int main() {
 
 ***************************************************************************************************************************
 
-# TypeScript # npm # asc
+# TypeScript # WebAssembly (wasm) # AssemblyScript # npm # asc
 
 ***************************************************************************************************************************
 [
@@ -313,24 +313,48 @@ wasmFunc();
 
 ***************************************************************************************************************************
 
-# Swift
+# Swift # WebAssembly (wasm) # SwiftWasm
 
 ***************************************************************************************************************************
+===========================================================================================================================
+# Default Swift # Export SwiftWasm
+===========================================================================================================================
 [
-% cd $HOME/Desktop/GitHub/JavaScript-1/WebAssembly
+% cd $HOME
 ]
 
 % mkdir -p Swift
 
 % cd Swift
 
+---------------------------------------------------------------------------------------------------------------------------
+# swift # swiftc
+---------------------------------------------------------------------------------------------------------------------------
+# Swift
 % swift --version
+[
+swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+Target: arm64-apple-macosx15.0
+]
 
+# Swift Compile
 % swiftc --version
+[
+swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+Target: arm64-apple-macosx15.0
+]
 
-## Installation
-# Swift Toolchain # pkg
-# Download the appropriate Swift toolchain version from swift.org/install 
+% ls -l `which swift`
+% ls /usr/bin
+[
+swift
+swift-inspect
+swiftc
+]
+---------------------------------------------------------------------------------------------------------------------------
+
+## Swift Toolchain # Install # pkg
+# Download the appropriate Swift toolchain version from swift.org/install and install the pkg
 # swift-5.10-RELEASE-osx.pkg
 
 [
@@ -338,23 +362,39 @@ wasmFunc();
 # swift-5.10-RELEASE-osx-symbols.pkg
 ]
 
+---------------------------------------------------------------------------------------------------------------------------
+# swift # swiftc # Same # After installing swift-5.10-RELEASE-osx.pkg 
+---------------------------------------------------------------------------------------------------------------------------
+# Swift
 % swift --version
+[
+swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+Target: arm64-apple-macosx15.0
+]
 
+# Swift Compile
 % swiftc --version
+[
+swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+Target: arm64-apple-macosx15.0
+]
 
-# Run the package installer, which will install an Xcode toolchain into /Library/Developer/Toolchains/
+# The package installer will install an Xcode toolchain into /Library/Developer/Toolchains/
 % ls /Library/Developer/Toolchains
 [
 swift-5.10-RELEASE.xctoolchain	swift-latest.xctoolchain
 ]
 
-# rm Toolchains
-[
+---------------------------------------------------------------------------------------------------------------------------
+# Remove Toolchains # To start anew
+---------------------------------------------------------------------------------------------------------------------------
+% ls /Library/Developer/Toolchains
 % sudo rm -rf /Library/Developer/Toolchains/*
-]
+---------------------------------------------------------------------------------------------------------------------------
 
-# NB
-[
+---------------------------------------------------------------------------------------------------------------------------
+# NB # Swift # macOS Package Installer # https://swift.org/install/macos/package_installer/
+---------------------------------------------------------------------------------------------------------------------------
 # An Xcode toolchain (.xctoolchain) includes a copy of the compiler, LLDB, and other related tools needed to provide a cohesive development experience for working in a specific version of Swift
 
 # To select the installed toolchain in Xcode, navigate to Xcode > Toolchains.
@@ -363,6 +403,8 @@ swift-5.10-RELEASE.xctoolchain	swift-latest.xctoolchain
 
 # Selecting a toolchain in Xcode affects the IDE only. To use the installed toolchain with xcrun, pass the --toolchain swift option. For example:
 
+% xcrun --version
+
 % xcrun --toolchain swift swift --version
 
 # xcodebuild, pass the -toolchain swift option.
@@ -370,21 +412,7 @@ swift-5.10-RELEASE.xctoolchain	swift-latest.xctoolchain
 # Alternatively, you may select the toolchain on the command line by exporting the TOOLCHAINS environment variable as follows:
 
 % export TOOLCHAINS=$(plutil -extract CFBundleIdentifier raw /Library/Developer/Toolchains/<toolchain name>.xctoolchain/Info.plist)
-]
-
-[
-% xcrun --version
-
-% xcrun --toolchain swift swift --version
-]
-
-% ls -l `which swift`
-% ls /usr/bin/
-[
-% ls /usr/bin/swift
-% ls /usr/bin/swift-inspect
-% ls /usr/bin/swiftc
-]
+---------------------------------------------------------------------------------------------------------------------------
 
 ## Swift SDK for WebAssembly # Cross compile to WebAssembly
 # Match the Swift Toolchain Version # swift-5.10-RELEASE # swift-wasm-5.10.0-RELEASE
@@ -397,20 +425,15 @@ swift-5.10-RELEASE.xctoolchain	swift-latest.xctoolchain
 5.10.0-RELEASE-wasm
 ]
 
-# swift sdk remove
-[
-% swift sdk remove 5.10.0-RELEASE-wasm
-
+---------------------------------------------------------------------------------------------------------------------------
+# swift sdk remove # To start anew
+---------------------------------------------------------------------------------------------------------------------------
 % swift sdk list
-]
 
-# Run the package installer, which will install an Xcode toolchain into /Library/Developer/Toolchains/
-% ls /Library/Developer/Toolchains
-[
-swift-5.10-RELEASE.xctoolchain	swift-latest.xctoolchain
-]
+% swift sdk remove 5.10.0-RELEASE-wasm
+---------------------------------------------------------------------------------------------------------------------------
 
-# Swift file
+# Swift File
 % nano sample.swift
 [
 #if os(macOS)
@@ -436,52 +459,75 @@ print("[1, 3, 5, 7].reduce(1, *) = \([1, 3, 5, 7].reduce(1, *))")
 
 % cat sample.swift
 
-% swift sample.swift
+# Swift Compile 
+% swiftc sample.swift
 
-## Terminal New Window # SwiftWasm
+---------------------------------------------------------------------------------------------------------------------------
+# Swift Run 
+---------------------------------------------------------------------------------------------------------------------------
+% ./sample
 [
-% cd $HOME
+macOS
+Swift >= 5.0
+[1, 3, 5, 7].reduce(0, +) = 16
+[1, 3, 5, 7].reduce(1, *) = 105
 ]
-# SwiftWasm Toolchain Installation # pkg
+---------------------------------------------------------------------------------------------------------------------------
+
+## SwiftWasm Toolchain # Install # pkg
 % wget https://github.com/swiftwasm/swift/releases/download/swift-wasm-5.10.0-RELEASE/swift-wasm-5.10.0-RELEASE-macos_arm64.pkg
 [
 % curl -L -o swift-wasm-5.10.0-RELEASE-macos_arm64.pkg https://github.com/swiftwasm/swift/releases/download/swift-wasm-5.10.0-RELEASE/swift-wasm-5.10.0-RELEASE-macos_arm64.pkg
 ]
 # swift-wasm-5.10.0-RELEASE-macos_arm64.pkg
 
-# Run the package installer, which will install an Xcode toolchain into /Library/Developer/Toolchains/
+# The package installer will install an Xcode toolchain into /Library/Developer/Toolchains/
 % ls /Library/Developer/Toolchains
 [
 swift-5.10-RELEASE.xctoolchain		swift-latest.xctoolchain		swift-wasm-5.10.0-RELEASE.xctoolchain
 ]
 
+---------------------------------------------------------------------------------------------------------------------------
+# swift # swiftc # Same # Before exporting swift-wasm-5.10.0-RELEASE.xctoolchain
+---------------------------------------------------------------------------------------------------------------------------
+# Swift
 % swift --version
 [
 swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+Target: arm64-apple-macosx15.0
 ]
 
+# Swift Compile
 % swiftc --version
 [
 swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+Target: arm64-apple-macosx15.0
 ]
+---------------------------------------------------------------------------------------------------------------------------
 
 # export swift-wasm Toolchain
 % export PATH="/Library/Developer/Toolchains/swift-wasm-5.10.0-RELEASE.xctoolchain/usr/bin/":$PATH
 
+---------------------------------------------------------------------------------------------------------------------------
+# swift # swiftc # Changed # After exporting swift-wasm-5.10.0-RELEASE.xctoolchain
+---------------------------------------------------------------------------------------------------------------------------
+# SwiftWasm Swift
 % swift --version
 [
 SwiftWasm Swift version 5.10-dev (LLVM e98989b1092ff3a, Swift 23e8e340a7a32a7)
+Target: arm64-apple-darwin24.1.0
 ]
 
 % swiftc --version
 [
 SwiftWasm Swift version 5.10-dev (LLVM e98989b1092ff3a, Swift 23e8e340a7a32a7)
+Target: arm64-apple-darwin24.1.0
 ]
 
-# Compile Swift code into WebAssembly with WASI
+# Compile the Swift code into WebAssembly with WASI
 % swiftc -target wasm32-unknown-wasi sample.swift -o sample.wasm
 
-# Run the produced binary on WebAssembly runtime
+# Run the produced binary with wasmtime (or other WebAssembly runtime) # After downloading and installing the wasmtime
 [
 % wget https://wasmtime.dev/install.sh
 ]
@@ -492,13 +538,13 @@ SwiftWasm Swift version 5.10-dev (LLVM e98989b1092ff3a, Swift 23e8e340a7a32a7)
     Finished installation. Open a new terminal to start using Wasmtime!
 ]
 
-% cat /Users/rajaniapple/.zshrc
-[
-...
+---------------------------------------------------------------------------------------------------------------------------
+% cat ~/.zshrc # Remove the following from ~/.zshrc # To start anew
+---------------------------------------------------------------------------------------------------------------------------
 export WASMTIME_HOME="$HOME/.wasmtime"
 
 export PATH="$WASMTIME_HOME/bin:$PATH"
-]
+---------------------------------------------------------------------------------------------------------------------------
 
 ## Terminal New Window # wasmtime
 [
@@ -507,10 +553,31 @@ export PATH="$WASMTIME_HOME/bin:$PATH"
 
 % wasmtime --version
 
+---------------------------------------------------------------------------------------------------------------------------
+# Run For Same Output As Above # Swift Run 
+---------------------------------------------------------------------------------------------------------------------------
 % wasmtime sample.wasm
+[
+Swift >= 5.0
+[1, 3, 5, 7].reduce(0, +) = 16
+[1, 3, 5, 7].reduce(1, *) = 105
+]
+---------------------------------------------------------------------------------------------------------------------------
 
-## SwiftPM package to WebAssembly
-# Terminal New Window # SwiftPM # SwiftWasm
+---------------------------------------------------------------------------------------------------------------------------
+# The produced binary depends on WASI which is an interface of system call for WebAssembly
+# So you need to use WASI supported runtime and when you run the binary on browser, you need WASI polyfill library like @bjorn3/browser_wasi_shim
+
+# A pure javascript shim for WASI
+# Implementation status: A subset of wasi_snapshot_preview1 is implemented. The rest either throws an exception, returns an error or is incorrectly implemented.
+# npm install @bjorn3/browser_wasi_shim --save
+---------------------------------------------------------------------------------------------------------------------------
+===========================================================================================================================
+
+===========================================================================================================================
+## SwiftPM package to WebAssembly # SwiftPM # SwiftWasm
+===========================================================================================================================
+# Terminal New Window 
 [
 % cd $HOME
 ]
@@ -541,9 +608,12 @@ Target: arm64-apple-darwin24.1.0
 [
 Hello, world!
 ]
+===========================================================================================================================
 
-## SwiftPM package to WebAssembly
-# Terminal New Window # SwiftPM # Swift SDK # Swift
+===========================================================================================================================
+## SwiftPM package to WebAssembly # SwiftPM # Swift SDK # Default Swift
+===========================================================================================================================
+# Terminal New Window 
 [
 % cd $HOME
 ]
@@ -553,17 +623,19 @@ Hello, world!
 % cd SwiftSDK
 
 # Create a package from template
+# Default Swift
 % swift --version
 [
 swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
 Target: arm64-apple-macosx15.0
 ]
 
-# Build the Project into a WebAssembly binary  # SwiftPM # Swift SDK # Swift
+# Build the Project into a WebAssembly binary  # SwiftPM # Swift SDK # Default Swift
 % swift package init --type executable --name Sample 
 
 # When Swift SDK is installed
 # swift build --swift-sdk <SDK name>
+% swift sdk list
 % swift build --swift-sdk 5.10.0-RELEASE-wasm
 
 # Run the produced binary
@@ -573,12 +645,13 @@ Target: arm64-apple-macosx15.0
 [
 Hello, world!
 ]
+===========================================================================================================================
 ***************************************************************************************************************************
 
 
 ***************************************************************************************************************************
 
-# Go # tinygo
+# Go # WebAssembly (wasm) # tinygo
 
 ***************************************************************************************************************************
 [
@@ -728,7 +801,7 @@ wasmFunc();
 
 ***************************************************************************************************************************
 
-# Rust # cargo # wasm-pack
+# Rust # WebAssembly (wasm) # cargo # wasm-pack
 
 ***************************************************************************************************************************
 [
@@ -763,7 +836,7 @@ wasm-bindgen = "0.2"
 
 % cat Cargo.toml
 
-# find library `Rust`, rename file to `src/lib.rs` or specify lib.path
+# Find library `Rust`, rename file to `src/lib.rs` or specify lib.path
 % ls src
 % cat src/main.rs 
 % mv src/main.rs src/lib.rs
@@ -860,7 +933,7 @@ wasmFunc();
 
 ***************************************************************************************************************************
 
-# Python # Pyodide
+# Python # WebAssembly (wasm) # Pyodide
 
 ***************************************************************************************************************************
 [
@@ -1066,7 +1139,7 @@ Math: 5 x 7 = 35
 
 ***************************************************************************************************************************
 
-# CS # dotnet # Node.js
+# CS # WebAssembly (wasm) # dotnet # wasmbrowser # Node.js # wasmconsole
 
 ***************************************************************************************************************************
 [
@@ -1294,7 +1367,7 @@ export function math(x, y) {
 ===========================================================================================================================
 
 ===========================================================================================================================
-# CS # dotnet # wasmbrowser
+# CS # WebAssembly (wasm) # dotnet # wasmbrowser
 ===========================================================================================================================
 [
 % cd $HOME
@@ -1302,6 +1375,16 @@ export function math(x, y) {
 
 % dotnet --version
 
+# CS # WebAssembly (wasm) # dotnet # wasmbrowser
+[
+# Prerequisites  # JavaScript interop on WASM
+% dotnet workload install wasm-tools
+# Experimental workload and project templates
+% dotnet workload install wasm-experimental
+% dotnet new install Microsoft.NET.Runtime.WebAssembly.Templates
+]
+
+# CS # WebAssembly (wasm) # dotnet # wasmbrowser
 % dotnet new wasmbrowser --name WasmBrowser
 
 % cd WasmBrowser
@@ -1315,7 +1398,7 @@ export function math(x, y) {
 ===========================================================================================================================
 
 ===========================================================================================================================
-# CS # Node.js # dotnet # wasmconsole
+# CS # WebAssembly (wasm) # dotnet # wasmconsole # Node.js
 ===========================================================================================================================
 [
 % cd $HOME
@@ -1323,6 +1406,7 @@ export function math(x, y) {
 
 % dotnet --version
 
+# CS # WebAssembly (wasm) # dotnet # wasmconsole # Node.js
 % dotnet new wasmconsole --name WasmConsole
 
 % cd WasmConsole
@@ -1361,7 +1445,7 @@ Hello, Console!
 
 ***************************************************************************************************************************
 
-# FS # dotnet # Bolero
+# FS # WebAssembly (wasm) # Bolero
 
 ***************************************************************************************************************************
 [
@@ -1400,11 +1484,13 @@ Hello, Console!
 [
 % sudo dotnet dev-certs https --trust
 ]
+[
 % sudo dotnet dev-certs https --clean
 
 % sudo dotnet dev-certs https
 
 % sudo dotnet dev-certs https --trust
+]
 
 % sudo dotnet run --project src/FSWebAssembly.Server
 ===========================================================================================================================
@@ -1455,14 +1541,16 @@ sign in
 
 ***************************************************************************************************************************
 
-# Ruby # WASI # ruby.wasm # wasmtime # Node.js
+# Ruby # WebAssembly (wasm) # WASI # ruby.wasm # wasmtime # Node.js
 
 ***************************************************************************************************************************
 [
 % cd $HOME
 ]
 
-# Ruby on Browser
+===========================================================================================================================
+# Ruby # WebAssembly (wasm) # Browser
+===========================================================================================================================
 % mkdir -p "Ruby on Browser"
 
 % cd "Ruby on Browser"
@@ -1728,7 +1816,7 @@ rand.to_f # => 0.123456789
 ===========================================================================================================================
 
 ===========================================================================================================================
-# Ruby # WASI # ruby.wasm # wasmtime
+# Ruby # WebAssembly (wasm) # WASI # ruby.wasm # wasmtime
 ===========================================================================================================================
 # Package Ruby application as a WASI application
 [
@@ -1784,7 +1872,7 @@ Ruby: ruby 3.3.3 (2024-06-12 revision f1c7b6f435) [wasm32-wasi]
 ===========================================================================================================================
 
 ===========================================================================================================================
-# Ruby # Node.js
+# Ruby # WebAssembly (wasm) # npm install --save @ruby/3.3-wasm-wasi @ruby/wasm-wasi # Node.js
 ===========================================================================================================================
 % mkdir -p NodeJS
 
@@ -1830,7 +1918,7 @@ Math: 5 x 7 = 35
 
 ***************************************************************************************************************************
 
-# Java
+# Java # WebAssembly (wasm) # mvn # teavm
 
 ***************************************************************************************************************************
 [
@@ -1920,7 +2008,7 @@ Math: 5 x 7 = 35
 # Java 8
 # JDK 8 
 # Apache Maven 3.9.9
-% export PATH="$HOME/Downloads/Software/JDK/JDK8/jdk1.8.0_401.jdk//Contents/Home//bin/:$HOME/Downloads/Software/ApacheMaven/apache-maven-3.9.9/bin/":$PATH
+% export PATH="$HOME/Downloads/Software/JDK/JDK8/jdk1.8.0_401.jdk/Contents/Home/bin/:$HOME/Downloads/Software/ApacheMaven/apache-maven-3.9.9/bin/":$PATH
 
 % java -version
 
@@ -2293,8 +2381,10 @@ https://wasmtime.dev/
 https://w3.org/
 https://developer.mozilla.org/
 https://emscripten.org/
-https://assemblyscript.org/
+https://nodejs.org/
+https://npmjs.com/
 https://typescriptlang.org/
+https://assemblyscript.org/
 https://swift.org/
 https://developer.apple.com/
 https://swiftwasm.org/
@@ -2311,8 +2401,6 @@ https://developer.microsoft.com/
 https://fsharp.org/
 https://foundation.fsharp.org/
 https://fsbolero.io/
-https://nodejs.org/
-https://npmjs.com/
 https://ruby-lang.org/
 https://rubygems.org/
 https://openjdk.org/
