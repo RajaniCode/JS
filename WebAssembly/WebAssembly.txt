@@ -328,6 +328,28 @@ wasmFunc();
 % cd Swift
 
 ---------------------------------------------------------------------------------------------------------------------------
+# NB # Swift # macOS Package Installer # https://swift.org/install/macos/package_installer/
+---------------------------------------------------------------------------------------------------------------------------
+# An Xcode toolchain (.xctoolchain) includes a copy of the compiler, LLDB, and other related tools needed to provide a cohesive development experience for working in a specific version of Swift
+
+# To select the installed toolchain in Xcode, navigate to Xcode > Toolchains.
+
+# Xcode uses the selected toolchain for building Swift code, debugging, and even code completion and syntax coloring. You’ll see a new toolchain indicator in Xcode’s toolbar when Xcode is using an installed toolchain. Select the default toolchain to go back to Xcode’s built-in tools.
+
+# Selecting a toolchain in Xcode affects the IDE only. To use the installed toolchain with xcrun, pass the --toolchain swift option. For example:
+
+% xcrun --version
+
+% xcrun --toolchain swift swift --version
+
+# xcodebuild, pass the -toolchain swift option.
+
+# Alternatively, you may select the toolchain on the command line by exporting the TOOLCHAINS environment variable as follows:
+
+% export TOOLCHAINS=$(plutil -extract CFBundleIdentifier raw /Library/Developer/Toolchains/<toolchain name>.xctoolchain/Info.plist)
+---------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------
 # swift # swiftc
 ---------------------------------------------------------------------------------------------------------------------------
 # Swift
@@ -390,28 +412,6 @@ swift-5.10-RELEASE.xctoolchain	swift-latest.xctoolchain
 ---------------------------------------------------------------------------------------------------------------------------
 % ls /Library/Developer/Toolchains
 % sudo rm -rf /Library/Developer/Toolchains/*
----------------------------------------------------------------------------------------------------------------------------
-
----------------------------------------------------------------------------------------------------------------------------
-# NB # Swift # macOS Package Installer # https://swift.org/install/macos/package_installer/
----------------------------------------------------------------------------------------------------------------------------
-# An Xcode toolchain (.xctoolchain) includes a copy of the compiler, LLDB, and other related tools needed to provide a cohesive development experience for working in a specific version of Swift
-
-# To select the installed toolchain in Xcode, navigate to Xcode > Toolchains.
-
-# Xcode uses the selected toolchain for building Swift code, debugging, and even code completion and syntax coloring. You’ll see a new toolchain indicator in Xcode’s toolbar when Xcode is using an installed toolchain. Select the default toolchain to go back to Xcode’s built-in tools.
-
-# Selecting a toolchain in Xcode affects the IDE only. To use the installed toolchain with xcrun, pass the --toolchain swift option. For example:
-
-% xcrun --version
-
-% xcrun --toolchain swift swift --version
-
-# xcodebuild, pass the -toolchain swift option.
-
-# Alternatively, you may select the toolchain on the command line by exporting the TOOLCHAINS environment variable as follows:
-
-% export TOOLCHAINS=$(plutil -extract CFBundleIdentifier raw /Library/Developer/Toolchains/<toolchain name>.xctoolchain/Info.plist)
 ---------------------------------------------------------------------------------------------------------------------------
 
 ## Swift SDK for WebAssembly # Cross compile to WebAssembly
