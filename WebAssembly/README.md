@@ -3,6 +3,8 @@ WebAssembly
 
 - WebAssembly
 
+- Emscripten
+
 - C
 
 - Node.js
@@ -122,6 +124,12 @@ Credits/FS-learn.microsoft.com.svg)](https://learn.microsoft.com/dotnet/fsharp/)
 [![image](
 Credits/Blazor-learn.microsoft.com.svg)](https://learn.microsoft.com/aspnet/core/blazor/)  
 [![image](
+Credits/linuxcontainers.org.svg)](https://linuxcontainers.org/)  
+[![image](
+Credits/ubuntu.com.svg)](https://ubuntu.com/)  
+[![image](
+Credits/docker.com.svg)](https://docker.com/)  
+[![image](
 Credits/docs.wasmtime.dev.svg)](https://docs.wasmtime.dev/)  
 [![image](
 Credits/book.swiftwasm.org.svg)](https://book.swiftwasm.org/)<!--[![image](
@@ -133,6 +141,4 @@ Credits/RustRover-jetbrains.com.svg)](https://jetbrains.com/rust/)
 [![image](
 Credits/bytecodealliance.org.svg)](https://bytecodealliance.org/)  
 [![image](
-Credits/elmish.github.io.svg)](https://elmish.github.io/)  
-[![image](
-Credits/tokamak.dev.svg)](https://tokamak.dev/)-->
+Credits/elmish.github.io.svg)](https://elmish.github.io/)-->

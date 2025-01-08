@@ -5,7 +5,7 @@
 ###########################################################################################################################
 ***************************************************************************************************************************
 
-# Emscripten # WebAssembly (Wasm) # emsdk # emcc # Node.js # HTML
+# Emscripten # WebAssembly (Wasm) # emsdk # emcc # Node.js # HTML # em++ # Python # Web Audio
 
 ***************************************************************************************************************************
 [
@@ -95,6 +95,57 @@ int main() {
 # Terminal New Window
 % curl http://127.0.0.1:8000
 % open http://127.0.0.1:8000
+===========================================================================================================================
+
+===========================================================================================================================
+# Emscripten # WebAssembly (Wasm) # em++ # Python # Web Audio
+===========================================================================================================================
+# git sparse-checkout
+# https://github.com/emscripten-core/emscripten/tree/main/test/webaudio
+# https://github1s.com/emscripten-core/emscripten/tree/main/test/webaudio
+% git clone --filter=blob:none --no-checkout --sparse https://github.com/emscripten-core/emscripten
+
+% cd emscripten
+
+% git sparse-checkout add test/webaudio
+
+% git checkout
+
+% ls -a
+
+% cd test/webaudio
+
+% mkdir -p test && nano test/cors.txt
+[
+#!/usr/bin/env python3
+from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler, test
+import sys
+
+class CORSRequestHandler (SimpleHTTPRequestHandler):
+    def end_headers (self):
+        #self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header("Cross-Origin-Opener-Policy", "same-origin")
+        self.send_header("Cross-Origin-Embedder-Policy", "require-corp")
+
+        SimpleHTTPRequestHandler.end_headers(self)
+
+if __name__ == '__main__':
+    test(CORSRequestHandler, ThreadingHTTPServer, protocol="HTTP/1.1", port=int(sys.argv[1]) if len(sys.argv) > 1 else 8000, bind = '127.0.0.1')
+]
+
+% cat test/cors.txt
+
+% python3 test/cors.txt
+
+# Browse
+http://127.0.0.1:8000/test/test.html
+===========================================================================================================================
+
+===========================================================================================================================
+# Terminal New Window
+# cd emscripten/test/webaudio
+% em++ --version
+% em++ audioworklet.c -s ENVIRONMENT='web','worker' -sAUDIO_WORKLET=1 -sWASM_WORKERS=1 -o test/test.htm
 ===========================================================================================================================
 ***************************************************************************************************************************
 
@@ -347,7 +398,10 @@ wasmFunc();
 # Remove Toolchains
 [
 % ls /Library/Developer/Toolchains
-% sudo rm -rf /Library/Developer/Toolchains/*
+% sudo rm -rf /Library/Developer/Toolchains
+
+% ls ~/Library/Developer/Toolchains
+% sudo rm -rf ~/Library/Developer/Toolchains
 ]
 
 # Remove swift sdk 
@@ -432,7 +486,7 @@ swift-5.10-RELEASE.xctoolchain	swift-latest.xctoolchain
 # Remove Toolchains
 [
 % ls /Library/Developer/Toolchains
-% sudo rm -rf /Library/Developer/Toolchains/*
+% sudo rm -rf /Library/Developer/Toolchains
 ]
 
 ## Swift SDK for WebAssembly # Cross compile to WebAssembly
@@ -659,10 +713,785 @@ Hello, world!
 ===========================================================================================================================
 
 ===========================================================================================================================
-# Default Swift # Export SwiftWasm # SwiftWasm Swift
+# Swift # WebAssembly (wasm) # SwiftWasm # WebAssembly Text Format
+===========================================================================================================================
+
+% cd $HOME
+
+# Swift
+% swift --version
+[
+swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+Target: arm64-apple-macosx15.0
+]
+
+[
+% unzip swift-for-wasm-examples-main.zip -d swift-for-wasm-wat-example && mv swift-for-wasm-wat-example/swift-for-wasm-examples-main/* $(pwd)/swift-for-wasm-wat-example
+]
+% mkdir swift-for-wasm-wat-example && tar -xvzf swift-for-wasm-examples-main.zip -C swift-for-wasm-wat-example --strip-components 1
+ 
+% cd swift-for-wasm-wat-example
+
+# swift repl # Swift # Swift # Date # Time
+import Foundation
+let dateTimeNow = Date()
+print("Swift Cocoa Date Time Now: \(dateTimeNow.description)")
+
+# Swift # Swift # Date # Time # Decode linear memory # offset + 100 
+% nano WATExample/Sources/WATExample/main.swift
+[
+import Foundation
+import WasmKit
+import WAT
+
+let dateTimeNow = Date()
+print("Swift Cocoa Date Time Now: \(dateTimeNow.description)")
+
+// Compute WAT file path.
+let watURL = URL(fileURLWithPath: #filePath)
+    .deletingLastPathComponent()
+    .deletingLastPathComponent()
+    .deletingLastPathComponent()
+    .appendingPathComponent("factorial.wat")
+
+// Parse from WAT to binary Wasm module.
+let binaryModule = try wat2wasm(String(decoding: Data(contentsOf: watURL), as: UTF8.self))
+
+// Parse as WasmKit IR.
+let parsedModule = try parseWasm(bytes: binaryModule)
+
+let engine = Engine()
+let store = Store(engine: engine)
+
+// Initialize WasmKit runtime
+let imports: Imports = [
+    "host": [
+        // Pass host printer function as a closure
+        "print": ExternalValue.function(Function(store: store, type: .init(parameters: [.i32, .i32])) { caller, args in
+                guard let start = args.first?.i32,
+                      let offset = args.last?.i32
+                else { return [] }
+
+                // Decode linear memory
+                let string = String(
+                    decoding: caller.instance!.exports[memory: "memory"]!.data[Int(start) ..< Int(start + offset + 100)],
+                    as: UTF8.self
+                )
+
+                // Print the result
+                print("Guest module printed: \(string)")
+                return []
+            }
+        ),
+    ]
+]
+
+// Instantiate the module
+let moduleInstance = try parsedModule.instantiate(store: store, imports: imports)
+
+// Call `main` function
+let result = try moduleInstance.exports[function: "main"]!()
+print("Returned value: \(result)")
+]
+% cat WATExample/Sources/WATExample/main.swift
+
+# WebAssembly Text # Print # (data (i32.const 0) "Hola From WebAssembly Text Format!!!")
+% nano WATExample/factorial.wat
+[
+(module
+  (import "host" "print"
+    (func $print (param (; pointer ;) i32 (; length ;) i32)))
+  (export "main" (func $main))
+
+  (memory $memory 1)
+  (export "memory" (memory $memory))
+
+  ;; n! = n * (n - 1) * (n - 2) * ... * 2 * 1
+  (func $factorial (param $arg i64) (result i64)
+    (if (result i64)
+      (i64.eqz (local.get $arg))
+      (then (i64.const 1))
+      (else
+        (i64.mul
+          (local.get $arg)
+          (call $factorial
+            (i64.sub
+              (local.get $arg)
+              (i64.const 1)
+            ))))))
+
+  (func $main (result i64)
+    (call $factorial (i64.const 10))
+    (call $print (i32.const 0) (i32.const 13))
+  )
+
+  (data (i32.const 0) "Hola From WebAssembly Text Format!!!")
+)
+]
+
+% cat WATExample/factorial.wat
+
+% cd WATExample  
+
+% ls -a
+
+# Build # Cleanup
+% rm -rf .build
+
+% ls -a
+
+# Build
+% swift build
+
+# Run
+% swift run
+[
+Building for debugging...
+[1/1] Write swift-version--58304C5D6DBC2206.txt
+Build of product 'WATExample' complete! (0.21s)
+Swift Cocoa Date Time Now: 2025-01-08 20:47:07 +0000
+Guest module printed: Hola From WebAssembly Text Format!!!
+Returned value: [WasmTypes.Value.i64(3628800)]
+rajaniapple@Rajanis-MacBook-Pro WATExample % 
+]
+===========================================================================================================================
+# Swift # WebAssembly (wasm) # SwiftWasm # Browser App
+===========================================================================================================================
+[
+% cd $HOME
+]
+
+# Swift
+% swift --version
+[
+swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+Target: arm64-apple-macosx15.0
+]
+
+# https://github.com/apple/swift-for-wasm-examples # zip # main
+% wget --output-document=swift-for-wasm-examples-main.zip https://github.com/apple/swift-for-wasm-examples/archive/main.zip
+[
+% tar -xvzf swift-for-wasm-examples-main.zip
+]
+% unzip swift-for-wasm-examples-main.zip
+
+% cd swift-for-wasm-examples-main
+
+# Remove Toolchains
+[
+# Swift Xcode Toolchain # Installation Type  # "Install for all users of this computer"
+% ls /Library/Developer/Toolchains
+% sudo rm -rf /Library/Developer/Toolchains
+
+# Swift Xcode Toolchain # Installation Type  # "Install for me only" 
+% ls ~/Library/Developer/Toolchains
+% sudo rm -rf ~/Library/Developer/Toolchains
+]
+
+# Swift Toolchain # Install # pkg
+# Download the appropriate Swift toolchain version from swift.org/install and install the pkg
+# swift-6.0.2-RELEASE-osx.pkg
+
+% ls /Library/Developer/Toolchains
+[
+swift-6.0.2-RELEASE.xctoolchain	swift-latest.xctoolchain
+]
+
+# No such file or directory
+% ls ~/Library/Developer/Toolchains
+
+# export # Swift Toolchai
+% export PATH="/Library/Developer/Toolchains/swift-6.0.2-RELEASE.xctoolchain/usr/bin/":$PATH
+
+% swift --version
+[
+swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+Target: arm64-apple-macosx15.0
+]
+
+% export PATH="/Library/Developer/Toolchains/swift-6.0.2-RELEASE.xctoolchain/usr/bin/":$PATH
+
+% swift --version
+[
+Apple Swift version 6.0.2 (swift-6.0.2-RELEASE)
+Target: arm64-apple-macosx15.0
+]
+
+% wget https://github.com/swiftwasm/swift/releases/download/swift-wasm-5.10.0-RELEASE/swift-wasm-5.10.0-RELEASE-macos_arm64.artifactbundle.zip
+
+% sudo wget https://github.com/swiftwasm/swift/releases/download/swift-wasm-6.0.2-RELEASE/swift-wasm-6.0.2-RELEASE-macos_arm64.pkg
+
+% sudo installer -pkg swift-wasm-6.0.2-RELEASE-macos_arm64.pkg -target /Library/Developer/Toolchain
+
+% ls /Library/Developer/Toolchains
+[
+swift-6.0.2-RELEASE.xctoolchain		swift-latest.xctoolchain		swift-wasm-6.0.2-RELEASE.xctoolchain
+]
+
+% cd Guest
+
+% sudo ./build.sh
+
+% cd ../ServerHost
+
+% sudo swift run Server
+===========================================================================================================================
+# Terminal New Window
+===========================================================================================================================
+% curl http://127.0.0.1:8080/public/index.html
+% wget -S -O - http://127.0.0.1:8080/public/index.html
+% open http://127.0.0.1:8080/public/index.html
+
+% curl http://127.0.0.1:8080/public/upload.html
+% wget -S -O - http://127.0.0.1:8080/public/upload.html
+% open http://127.0.0.1:8080/public/upload.html
+===========================================================================================================================
+
+% sudo cat Sources/Server/App.swift
+[
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the Hummingbird open source project
+//
+// Copyright (c) 2024 Adam Fowler.
+// Licensed under Apache License v2.0.
+//
+// See https://github.com/hummingbird-project/template/blob/main/LICENSE for license information
+//
+//===----------------------------------------------------------------------===//
+
+import ArgumentParser
+import Hummingbird
+import Logging
+
+@main
+struct App: AsyncParsableCommand, AppArguments {
+    @Option(name: .shortAndLong)
+    var hostname: String = "127.0.0.1"
+
+    @Option(name: .shortAndLong)
+    var port: Int = 8080
+
+    @Option(name: .shortAndLong)
+    var logLevel: Logger.Level?
+
+    func run() async throws {
+        let app = try await buildApplication(self)
+        try await app.runService()
+    }
+}
+
+/// Extend `Logger.Level` so it can be used as an argument
+#if hasFeature(RetroactiveAttribute)
+    extension Logger.Level: @retroactive ExpressibleByArgument {}
+#else
+    extension Logger.Level: ExpressibleByArgument {}
+#endif
+]
+
+% sudo nano Sources/Server/IndexPage.swift
+
+% sudo cat Sources/Server/IndexPage.swift
+[
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the Swift open source project
+//
+// Copyright (c) 2024 Apple Inc. and the Swift project authors
+// Licensed under Apache License v2.0 with Runtime Library Exception
+//
+// See http://swift.org/LICENSE.txt for license information
+// See http://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
+//
+//===----------------------------------------------------------------------===//
+
+import Foundation
+import Hummingbird
+import _NIOFileSystem
+@preconcurrency import SystemPackage
+
+private func serveHTML(_ string: String) -> Response {
+    .init(
+        status: .ok,
+        headers: .init(dictionaryLiteral: (.contentType, "text/html"), (.contentLength, "\(string.utf8.count)")),
+        body: .init(byteBuffer: .init(string: string))
+    )
+}
+
+struct IndexPage: ResponseGenerator, Sendable {
+    struct Module: Sendable {
+        let name: String
+        let absolutePath: FilePath
+        let relativePath: FilePath
+    }
+
+    var modules: [Module] = []
+
+    var modulesList: String {
+        if self.modules.isEmpty {
+            """
+            <h1 id="wasm-logger"><a href="/public/upload.html">Rajani Swift SwiftWasm, Upload Wasm plugins</a> to get started</h1>
+            """
+        } else {
+            """
+            \(self.modules.sorted(using: KeyPathComparator(\.name, order: .forward)).map { module in
+                """
+                <h1 class="track-name">\(module.name)</h1>
+                <div
+                  class="plugin"
+                  data-module-path="\(module.relativePath)"
+                  style="display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;"
+                >
+                  <canvas class="plotter" width="1000" height="210"></canvas>
+                  <audio class="audio" type="audio.wav" controls></audio>
+                </div>
+                """
+            }.joined(separator: "\n"))
+            
+            <h1 class="track-name">Mix</h1>
+            <div
+              id="tracks-mix"
+              style="display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;"
+            >
+              <canvas class="plotter" width="1000" height="210"></canvas>
+              <audio class="audio" type="audio.wav" controls></audio>
+            </div>
+            """
+        }
+    }
+
+    func response(from request: Request, context: some RequestContext) throws -> Response {
+        serveHTML(
+            """
+            <html>
+              <head>
+                <meta charset="utf-8">
+                <title>Rajani Swift Audio Workstation</title>
+                <script type="module" src="/public/Sources/JavaScript/index.js">
+                </script>
+                <style>
+                body {
+                  background-color: black;
+                  padding: 1rem;
+                }
+                #wasm-logger, .track-name {
+                  font-family: sans-serif;
+                  color: white;
+                }
+                #wasm-logger a, .track-name a {
+                  color: #aabbcc;g
+                }
+                </style>
+              </head>
+              <body>
+                \(self.modulesList)
+              </body>
+            </html>
+            """
+        )
+    }
+}
+
+func discoverModules(directory: FilePath, root: FilePath) async throws -> [IndexPage.Module] {
+    try await FileSystem.shared.withDirectoryHandle(atPath: directory) {
+        var modules = [IndexPage.Module]()
+        let dirContents = $0.listContents()
+
+        for try await module in dirContents where module.type == .regular && module.path.isSynthModule {
+            let absolutePath = module.path
+            var relativePath = module.path
+            _ = relativePath.removePrefix(root)
+            modules.append(.init(
+                name: module.path.lastComponent?.stem ?? "Module",
+                absolutePath: absolutePath,
+                relativePath: relativePath
+            ))
+        }
+
+        return modules
+    }
+}
+
+extension FilePath {
+    var isSynthModule: Bool {
+        self.extension == "wasm" && self.stem != "Plotter"
+    }
+}
+]
+
+[
+% cd $HOME
+]
+
+% cd Swift/swift-for-wasm-examples-main/Guest
+
+% sudo ./build.sh
+
+% cd ../ServerHost
+
+% sudo swift run Server
 ===========================================================================================================================
 
 ===========================================================================================================================
+# Swift # WebAssembly (wasm) # SwiftWasm # Browser App # Docker
+===========================================================================================================================
+---------------------------------------------------------------------------------------------------------------------------
+# Docker # Server
+--------------------------------------------------------------------------------------------------------------------------
+% cd $HOME/Desktop/GitHub/JavaScript-1/WebAssembly/Swift
+
+% mkdir -p Docker
+
+% cd Docker
+
+# https://github.com/apple/swift-for-wasm-examples # zip # main
+% wget --output-document=swift-for-wasm-examples-main.zip https://github.com/apple/swift-for-wasm-examples/archive/main.zip
+[
+% tar -xvzf swift-for-wasm-examples-main.zip
+]
+% unzip swift-for-wasm-examples-main.zip
+
+
+% cd swift-for-wasm-examples-main
+
+% nano ServerHost/Sources/Server/IndexPage.swift 
+[
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the Swift open source project
+//
+// Copyright (c) 2024 Apple Inc. and the Swift project authors
+// Licensed under Apache License v2.0 with Runtime Library Exception
+//
+// See http://swift.org/LICENSE.txt for license information
+// See http://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
+//
+//===----------------------------------------------------------------------===//
+
+import Foundation
+import Hummingbird
+import _NIOFileSystem
+@preconcurrency import SystemPackage
+
+private func serveHTML(_ string: String) -> Response {
+    .init(
+        status: .ok,
+        headers: .init(dictionaryLiteral: (.contentType, "text/html"), (.contentLength, "\(string.utf8.count)")),
+        body: .init(byteBuffer: .init(string: string))
+    )
+}
+
+struct IndexPage: ResponseGenerator, Sendable {
+    struct Module: Sendable {
+        let name: String
+        let absolutePath: FilePath
+        let relativePath: FilePath
+    }
+
+    var modules: [Module] = []
+
+    var modulesList: String {
+        if self.modules.isEmpty {
+            """
+            <h1 id="wasm-logger"><a href="/public/upload.html">Rajani Swift SwiftWasm Docker, Upload Wasm plugins</a> to get started</h1>
+            """
+        } else {
+            """
+            \(self.modules.sorted(using: KeyPathComparator(\.name, order: .forward)).map { module in
+                """
+                <h1 class="track-name">\(module.name)</h1>
+                <div
+                  class="plugin"
+                  data-module-path="\(module.relativePath)"
+                  style="display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;"
+                >
+                  <canvas class="plotter" width="1000" height="210"></canvas>
+                  <audio class="audio" type="audio.wav" controls></audio>
+                </div>
+                """
+            }.joined(separator: "\n"))
+            
+            <h1 class="track-name">Mix</h1>
+            <div
+              id="tracks-mix"
+              style="display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;"
+            >
+              <canvas class="plotter" width="1000" height="210"></canvas>
+              <audio class="audio" type="audio.wav" controls></audio>
+            </div>
+            """
+        }
+    }
+
+    func response(from request: Request, context: some RequestContext) throws -> Response {
+        serveHTML(
+            """
+            <html>
+              <head>
+                <meta charset="utf-8">
+                <title>Rajani Swift SwiftWasm Docker Audio Workstation</title>
+                <script type="module" src="/public/Sources/JavaScript/index.js">
+                </script>
+                <style>
+                body {
+                  background-color: black;
+                  padding: 1rem;
+                }
+                #wasm-logger, .track-name {
+                  font-family: sans-serif;
+                  color: white;
+                }
+                #wasm-logger a, .track-name a {
+                  color: #aabbcc;g
+                }
+                </style>
+              </head>
+              <body>
+                \(self.modulesList)
+              </body>
+            </html>
+            """
+        )
+    }
+}
+
+func discoverModules(directory: FilePath, root: FilePath) async throws -> [IndexPage.Module] {
+    try await FileSystem.shared.withDirectoryHandle(atPath: directory) {
+        var modules = [IndexPage.Module]()
+        let dirContents = $0.listContents()
+
+        for try await module in dirContents where module.type == .regular && module.path.isSynthModule {
+            let absolutePath = module.path
+            var relativePath = module.path
+            _ = relativePath.removePrefix(root)
+            modules.append(.init(
+                name: module.path.lastComponent?.stem ?? "Module",
+                absolutePath: absolutePath,
+                relativePath: relativePath
+            ))
+        }
+
+        return modules
+    }
+}
+
+extension FilePath {
+    var isSynthModule: Bool {
+        self.extension == "wasm" && self.stem != "Plotter"
+    }
+}
+]
+% cat ServerHost/Sources/Server/IndexPage.swift
+
+% swift --version
+
+[
+% export PATH="/Library/Developer/Toolchains/swift-6.0.2-RELEASE.xctoolchain/usr/bin/":$PATH
+
+% swift --version
+]
+
+# Server
+# Start docker daemon
+% docker --version
+
+[
+% docker run --rm -it -v "$(pwd)":/root/build swiftlang/swift:nightly-jammy /bin/bash
+
+% docker run --network=swift-network --rm -it -v "$(pwd)":/root/build swiftlang/swift:nightly-jammy
+
+% docker run --network=swift-network -p 8080:8080 --rm -it -v "$(pwd)":/root/build swiftlang/swift:nightly-jammy
+
+% docker run -p 8080:8080 --rm -it -v "$(pwd)":/root/build swiftlang/swift:nightly-jammy
+]
+% docker run --rm -it -v "$(pwd)":/root/build swiftlang/swift:nightly-jammy /bin/bash
+
+:/# swift --version
+[
+Swift version 6.2-dev (LLVM 06a77c5cc0ff511, Swift f7fb0991b79fcda)
+Target: aarch64-unknown-linux-gnu
+]
+
+:/# ls 
+
+:/# cd /root/build
+
+# build
+:/# ls ServerHost
+
+:/# ls ServerHost/Sources
+
+:/# ls ServerHost/Sources/Server
+
+:/# cat ServerHost/Sources/Server/IndexPage.swift
+
+:/# apt --version
+]
+:/# apt-get --version
+
+[
+:/# apt update
+]
+:/# apt-get update
+
+[
+:/# apt install nano
+]
+:/# apt-get install nano
+
+:/# nano --version
+
+[
+[
+:/# apt install sudo
+]
+:/# apt-get install sudo
+]
+
+:/# nano ServerHost/Sources/Server/IndexPage.swift
+
+:/# nano IndexPage.swift
+
+:/# cat ServerHost/Sources/Server/IndexPage.swift
+
+:/# cd Guest
+
+:/# ./build.sh
+
+:/# cd ../ServerHost
+
+:/# swift run Server
+
+# [control + C]
+:/# exit
+--------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------
+# Docker # Guest
+--------------------------------------------------------------------------------------------------------------------------
+% docker --version
+
+% docker ps
+[                 
+CONTAINER ID   IMAGE                           COMMAND       CREATED          STATUS          PORTS     NAMES
+e1169e817935   swiftlang/swift:nightly-jammy   "/bin/bash"   11 minutes ago   Up 11 minutes             beautiful_mclaren
+]
+
+# docker inspect -f "{{ .NetworkSettings.IPAddress }}" <CONTAINER ID>
+% docker inspect -f "{{ .NetworkSettings.IPAddress }}" e1169e817935
+
+[
+% docker exec beautiful_mclaren ls -la /usr
+% docker exec e1169e817935 ls -la /usr
+]
+
+[
+% docker exec -i -t e1169e817935 /bin/bash
+]
+% docker exec -i -t beautiful_mclaren /bin/bash
+
+:/# swift --version
+[
+Swift version 6.2-dev (LLVM 06a77c5cc0ff511, Swift f7fb0991b79fcda)
+Target: aarch64-unknown-linux-gnu
+]
+
+[
+:/# apt --version
+]
+:/# apt-get --version
+
+[
+:/# apt-get update
+]
+:/# apt update
+
+[
+:/# apt-get install dnsutils
+]
+:/# apt install dnsutils
+:/# nslookup -version
+
+:/# nslookup host.docker.internal
+[
+Server:		192.168.65.7
+Address:	192.168.65.7#53
+
+Non-authoritative answer:
+Name:	host.docker.internal
+Address: 192.168.65.254
+Name:	host.docker.internal
+Address: fdc4:f303:9324::254
+]
+
+[
+:/# apt-get install curl
+]
+:/# apt install curl
+
+:/# curl --version
+
+:/# curl http://127.0.0.1:8080/public/index.html
+
+:/# curl http://127.0.0.1:8080/public/upload.html
+
+[
+:/# apt-get install wget
+]
+:/# apt install wget
+
+:/# wget --version
+
+:/# ls 
+
+:/# wget -S -o - http://127.0.0.1:8080/public/index.html
+
+:/# ls 
+
+:/# cat index.html
+
+:/# wget -S -o - http://127.0.0.1:8080/public/upload.html
+
+:/# ls 
+
+:/# cat upload.html
+
+:/# exit
+---------------------------------------------------------------------------------------------------------------------------
+===========================================================================================================================
+***************************************************************************************************************************
+
+
+***************************************************************************************************************************
+
+# Docker cleanup
+
+**************************************************************************************************************************
+
+[
+% docker ps --all --quiet
+% docker stop $(docker ps -a -q)
+% docker rm $(docker ps -a -q) --force
+]
+% docker container list --all --quiet
+% docker stop $(docker container list -a -q)
+% docker rm $(docker container list -a -q) --force
+% docker container prune
+
+% docker image list --all --quiet
+% docker rmi $(docker image list -a -q) --force 
+% docker image prune --all
+
+% docker volume list --quiet
+% docker volume rm $(docker volume list --quiet) --force
+% docker volume prune --all
+
+% docker network list --quiet --filter "type=custom"
+% docker network rm $(docker network list --quiet --filter "type=custom")
+% docker network prune
+
+% docker system info
+% docker system prune --all --volumes
 ***************************************************************************************************************************
 
 
