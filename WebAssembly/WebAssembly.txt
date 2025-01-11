@@ -62,7 +62,6 @@ int main() {
 # Emscripten HTML
 # Emscripten optimize code for size
 % emcc index.c -O3 -o index.html
-
 ===========================================================================================================================
 # HTTP Server
 ===========================================================================================================================
@@ -90,16 +89,19 @@ int main() {
 % php -S 127.0.0.1:8000
 ]
 ===========================================================================================================================
-
-===========================================================================================================================
 # Terminal New Window
+===========================================================================================================================
 % curl http://127.0.0.1:8000
 % open http://127.0.0.1:8000
 ===========================================================================================================================
-
-===========================================================================================================================
 # Emscripten # WebAssembly (Wasm) # em++ # Python # Web Audio
 ===========================================================================================================================
+[
+% cd $HOME
+% mkdir -p Emscripten
+% cd Emscripten
+]
+
 # git sparse-checkout
 # https://github.com/emscripten-core/emscripten/tree/main/test/webaudio
 # https://github1s.com/emscripten-core/emscripten/tree/main/test/webaudio
@@ -140,9 +142,12 @@ if __name__ == '__main__':
 # Browse
 http://127.0.0.1:8000/test/test.html
 ===========================================================================================================================
-
-===========================================================================================================================
 # Terminal New Window
+===========================================================================================================================
+[
+% cd $HOME
+% cd Emscripten
+]
 # cd emscripten/test/webaudio
 % em++ --version
 % em++ audioworklet.c -s ENVIRONMENT='web','worker' -sAUDIO_WORKLET=1 -sWASM_WORKERS=1 -o test/test.htm
@@ -155,17 +160,15 @@ http://127.0.0.1:8000/test/test.html
 # C # WebAssembly (wasm) # Emscripten # emcc # Node.js # HTML
 
 ***************************************************************************************************************************
+[
+% cd $HOME
+% mkdir -p C
+% cd C
+]
+
 % brew install emscripten
 
 % emcc --version
-
-[
-% cd $HOME
-]
-
-% mkdir -p C
-
-% cd C
 
 % nano index.c  
 [
@@ -199,7 +202,6 @@ int main() {
 # Emscripten HTML
 # Emscripten optimize the code for size
 % emcc index.c -O3 -o index.html
-
 ===========================================================================================================================
 # HTTP Server
 ===========================================================================================================================
@@ -227,9 +229,8 @@ int main() {
 % php -S 127.0.0.1:8000
 ]
 ===========================================================================================================================
-
-===========================================================================================================================
 # Terminal New Window
+===========================================================================================================================
 % curl http://127.0.0.1:8000
 % open http://127.0.0.1:8000
 ===========================================================================================================================
@@ -243,11 +244,9 @@ int main() {
 ***************************************************************************************************************************
 [
 % cd $HOME
-]
-
 % mkdir -p TypeScript
-
 % cd TypeScript
+]
 
 % nano index.ts
 [
@@ -325,7 +324,6 @@ wasmFunc();
 [
 % wget https://www.google.com/favicon.ico
 ]
-
 ===========================================================================================================================
 # HTTP Server
 ===========================================================================================================================
@@ -353,9 +351,8 @@ wasmFunc();
 % php -S 127.0.0.1:8000
 ]
 ===========================================================================================================================
-
-===========================================================================================================================
 # Terminal New Window
+===========================================================================================================================
 % curl http://127.0.0.1:8000
 % open http://127.0.0.1:8000
 ===========================================================================================================================
@@ -391,8 +388,6 @@ wasmFunc();
 
 % export TOOLCHAINS=$(plutil -extract CFBundleIdentifier raw /Library/Developer/Toolchains/<toolchain name>.xctoolchain/Info.plist)
 ---------------------------------------------------------------------------------------------------------------------------
-
----------------------------------------------------------------------------------------------------------------------------
 # To start anew # Toolchains # swift sdk # wasmtime
 ---------------------------------------------------------------------------------------------------------------------------
 # Remove Toolchains
@@ -418,17 +413,13 @@ export WASMTIME_HOME="$HOME/.wasmtime"
 export PATH="$WASMTIME_HOME/bin:$PATH"
 ]
 ---------------------------------------------------------------------------------------------------------------------------
-
----------------------------------------------------------------------------------------------------------------------------
 # swift # swiftc
 ---------------------------------------------------------------------------------------------------------------------------
 [
 % cd $HOME
-]
-
 % mkdir -p Swift
-
 % cd Swift
+]
 
 # Swift
 % swift --version
@@ -452,8 +443,8 @@ swift-inspect
 swiftc
 ]
 ---------------------------------------------------------------------------------------------------------------------------
-
-## Swift Toolchain # Install # pkg
+# Swift Xcode Toolchain # Install # pkg
+---------------------------------------------------------------------------------------------------------------------------
 # Download the appropriate Swift toolchain version from swift.org/install and install the pkg
 # swift-5.10-RELEASE-osx.pkg
 
@@ -488,8 +479,9 @@ swift-5.10-RELEASE.xctoolchain	swift-latest.xctoolchain
 % ls /Library/Developer/Toolchains
 % sudo rm -rf /Library/Developer/Toolchains
 ]
-
-## Swift SDK for WebAssembly # Cross compile to WebAssembly
+---------------------------------------------------------------------------------------------------------------------------
+# Swift SDK for WebAssembly # Cross compile to WebAssembly
+---------------------------------------------------------------------------------------------------------------------------
 # Match the Swift Toolchain Version # swift-5.10-RELEASE # swift-wasm-5.10.0-RELEASE
 # Install Swift SDKs for WebAssembly 
 % wget https://github.com/swiftwasm/swift/releases/download/swift-wasm-5.10.0-RELEASE/swift-wasm-5.10.0-RELEASE-macos_arm64.artifactbundle.zip
@@ -544,8 +536,9 @@ Swift >= 5.0
 [1, 3, 5, 7].reduce(0, +) = 16
 [1, 3, 5, 7].reduce(1, *) = 105
 ]
-
-## SwiftWasm Toolchain # Install # pkg
+---------------------------------------------------------------------------------------------------------------------------
+# SwiftWasm Toolchain # Install # pkg
+---------------------------------------------------------------------------------------------------------------------------
 % wget https://github.com/swiftwasm/swift/releases/download/swift-wasm-5.10.0-RELEASE/swift-wasm-5.10.0-RELEASE-macos_arm64.pkg
 [
 % curl -L -o swift-wasm-5.10.0-RELEASE-macos_arm64.pkg https://github.com/swiftwasm/swift/releases/download/swift-wasm-5.10.0-RELEASE/swift-wasm-5.10.0-RELEASE-macos_arm64.pkg
@@ -612,10 +605,12 @@ export WASMTIME_HOME="$HOME/.wasmtime"
 
 export PATH="$WASMTIME_HOME/bin:$PATH"
 ]
-
-## Terminal New Window # wasmtime
+---------------------------------------------------------------------------------------------------------------------------
+# Terminal New Window # wasmtime
+---------------------------------------------------------------------------------------------------------------------------
 [
 % cd $HOME
+% cd Swift
 ]
 
 % wasmtime --version
@@ -628,8 +623,6 @@ Swift >= 5.0
 [1, 3, 5, 7].reduce(1, *) = 105
 ]
 ---------------------------------------------------------------------------------------------------------------------------
-
----------------------------------------------------------------------------------------------------------------------------
 # The produced binary depends on WASI which is an interface of system call for WebAssembly
 # So you need to use WASI supported runtime and when you run the binary on browser, you need WASI polyfill library like @bjorn3/browser_wasi_shim
 
@@ -638,18 +631,15 @@ Swift >= 5.0
 # npm install @bjorn3/browser_wasi_shim --save
 ---------------------------------------------------------------------------------------------------------------------------
 ===========================================================================================================================
-
-===========================================================================================================================
 # SwiftPM package to WebAssembly # SwiftPM # SwiftWasm
 ===========================================================================================================================
 # Terminal New Window 
 [
 % cd $HOME
-]
-
+% cd Swift
 % mkdir -p SwiftWasm
-
 % cd SwiftWasm
+]
 
 # export swift-wasm Toolchain
 % export PATH="/Library/Developer/Toolchains/swift-wasm-5.10.0-RELEASE.xctoolchain/usr/bin/":$PATH
@@ -674,18 +664,15 @@ Target: arm64-apple-darwin24.1.0
 Hello, world!
 ]
 ===========================================================================================================================
-
-===========================================================================================================================
 # SwiftPM package to WebAssembly # SwiftPM # Swift SDK # Default Swift
 ===========================================================================================================================
 # Terminal New Window 
 [
 % cd $HOME
-]
-
+% cd Swift
 % mkdir -p SwiftSDK
-
 % cd SwiftSDK
+]
 
 # Create a package from template
 # Default Swift
@@ -711,12 +698,12 @@ Target: arm64-apple-macosx15.0
 Hello, world!
 ]
 ===========================================================================================================================
-
-===========================================================================================================================
 # Swift # WebAssembly (wasm) # SwiftWasm # WebAssembly Text Format
 ===========================================================================================================================
-
+[
 % cd $HOME
+% cd Swift
+]
 
 # Swift
 % swift --version
@@ -725,7 +712,9 @@ swift-driver version: 1.115.1 Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 cl
 Target: arm64-apple-macosx15.0
 ]
 
+# https://github.com/apple/swift-for-wasm-examples # zip # main
 [
+% wget --output-document=swift-for-wasm-examples-main.zip https://github.com/apple/swift-for-wasm-examples/archive/main.z
 % unzip swift-for-wasm-examples-main.zip -d swift-for-wasm-wat-example && mv swift-for-wasm-wat-example/swift-for-wasm-examples-main/* $(pwd)/swift-for-wasm-wat-example
 ]
 % mkdir swift-for-wasm-wat-example && tar -xvzf swift-for-wasm-examples-main.zip -C swift-for-wasm-wat-example --strip-components 1
@@ -737,7 +726,9 @@ import Foundation
 let dateTimeNow = Date()
 print("Swift Cocoa Date Time Now: \(dateTimeNow.description)")
 
-# Swift # Swift # Date # Time # Decode linear memory # offset + 100 
+# Swift
+# Date # Time 
+# linear memory # offset # 36
 % nano WATExample/Sources/WATExample/main.swift
 [
 import Foundation
@@ -774,7 +765,7 @@ let imports: Imports = [
 
                 // Decode linear memory
                 let string = String(
-                    decoding: caller.instance!.exports[memory: "memory"]!.data[Int(start) ..< Int(start + offset + 100)],
+                    decoding: caller.instance!.exports[memory: "memory"]!.data[Int(start) ..< Int(start + offset)],
                     as: UTF8.self
                 )
 
@@ -795,8 +786,10 @@ print("Returned value: \(result)")
 ]
 % cat WATExample/Sources/WATExample/main.swift
 
-# WebAssembly Text # Print # (data (i32.const 0) "Hola From WebAssembly Text Format!!!")
-% nano WATExample/factorial.wat
+# WebAssembly Text # Print 
+# call $factorial (i64.const 10)  # factorial # 10
+# call $print (i32.const 0) (i32.const 36) # linear memory # offset # 36
+% nano WATExample/factorial.wat 
 [
 (module
   (import "host" "print"
@@ -822,7 +815,7 @@ print("Returned value: \(result)")
 
   (func $main (result i64)
     (call $factorial (i64.const 10))
-    (call $print (i32.const 0) (i32.const 13))
+    (call $print (i32.const 0) (i32.const 36))
   )
 
   (data (i32.const 0) "Hola From WebAssembly Text Format!!!")
@@ -852,13 +845,13 @@ Build of product 'WATExample' complete! (0.21s)
 Swift Cocoa Date Time Now: 2025-01-08 20:47:07 +0000
 Guest module printed: Hola From WebAssembly Text Format!!!
 Returned value: [WasmTypes.Value.i64(3628800)]
-rajaniapple@Rajanis-MacBook-Pro WATExample % 
 ]
 ===========================================================================================================================
 # Swift # WebAssembly (wasm) # SwiftWasm # Browser App
 ===========================================================================================================================
 [
 % cd $HOME
+% cd Swift
 ]
 
 # Swift
@@ -869,8 +862,8 @@ Target: arm64-apple-macosx15.0
 ]
 
 # https://github.com/apple/swift-for-wasm-examples # zip # main
-% wget --output-document=swift-for-wasm-examples-main.zip https://github.com/apple/swift-for-wasm-examples/archive/main.zip
 [
+% wget --output-document=swift-for-wasm-examples-main.zip https://github.com/apple/swift-for-wasm-examples/archive/main.zip
 % tar -xvzf swift-for-wasm-examples-main.zip
 ]
 % unzip swift-for-wasm-examples-main.zip
@@ -946,7 +939,6 @@ swift-6.0.2-RELEASE.xctoolchain		swift-latest.xctoolchain		swift-wasm-6.0.2-RELE
 % wget -S -O - http://127.0.0.1:8080/public/upload.html
 % open http://127.0.0.1:8080/public/upload.html
 ===========================================================================================================================
-
 % sudo cat Sources/Server/App.swift
 [
 //===----------------------------------------------------------------------===//
@@ -1121,9 +1113,10 @@ extension FilePath {
 
 [
 % cd $HOME
+% cd Swift
 ]
 
-% cd Swift/swift-for-wasm-examples-main/Guest
+% cd swift-for-wasm-examples-main/Guest
 
 % sudo ./build.sh
 
@@ -1138,11 +1131,12 @@ extension FilePath {
 ---------------------------------------------------------------------------------------------------------------------------
 # Docker # Server
 --------------------------------------------------------------------------------------------------------------------------
-% cd $HOME/Desktop/GitHub/JavaScript-1/WebAssembly/Swift
-
+[
+% cd $HOME
+% cd Swift
 % mkdir -p Docker
-
 % cd Docker
+]
 
 # https://github.com/apple/swift-for-wasm-examples # zip # main
 % wget --output-document=swift-for-wasm-examples-main.zip https://github.com/apple/swift-for-wasm-examples/archive/main.zip
@@ -1316,7 +1310,6 @@ Target: aarch64-unknown-linux-gnu
 
 :/# cd /root/build
 
-# build
 :/# ls ServerHost
 
 :/# ls ServerHost/Sources
@@ -1364,8 +1357,6 @@ Target: aarch64-unknown-linux-gnu
 
 # [control + C]
 :/# exit
---------------------------------------------------------------------------------------------------------------------------
-
 --------------------------------------------------------------------------------------------------------------------------
 # Docker # Guest
 --------------------------------------------------------------------------------------------------------------------------
@@ -1467,12 +1458,10 @@ Address: fdc4:f303:9324::254
 # Docker cleanup
 
 **************************************************************************************************************************
-
-[
 % docker ps --all --quiet
 % docker stop $(docker ps -a -q)
 % docker rm $(docker ps -a -q) --force
-]
+
 % docker container list --all --quiet
 % docker stop $(docker container list -a -q)
 % docker rm $(docker container list -a -q) --force
@@ -1502,11 +1491,9 @@ Address: fdc4:f303:9324::254
 ***************************************************************************************************************************
 [
 % cd $HOME
-]
-
 % mkdir -p Go
-
 % cd Go
+]
 
 % nano index.go
 [
@@ -1608,7 +1595,6 @@ wasmFunc();
 </html>
 ]
 % cat index.html
-
 ===========================================================================================================================
 # HTTP Server
 ===========================================================================================================================
@@ -1637,8 +1623,8 @@ wasmFunc();
 ]
 ===========================================================================================================================
 
-===========================================================================================================================
 # Terminal New Window
+===========================================================================================================================
 % curl http://127.0.0.1:8000
 % open http://127.0.0.1:8000
 ===========================================================================================================================
@@ -1652,11 +1638,9 @@ wasmFunc();
 ***************************************************************************************************************************
 [
 % cd $HOME
-]
-
 % mkdir -p Rust
-
 % cd Rust
+]
 
 [
 % curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -1740,7 +1724,6 @@ wasmFunc();
 </html>
 ]
 % cat index.html
-
 ===========================================================================================================================
 # HTTP Server
 ===========================================================================================================================
@@ -1768,9 +1751,8 @@ wasmFunc();
 % php -S 127.0.0.1:8000
 ]
 ===========================================================================================================================
-
-===========================================================================================================================
 # Terminal New Window
+===========================================================================================================================
 % curl http://127.0.0.1:8000
 % open http://127.0.0.1:8000
 ===========================================================================================================================
@@ -1783,7 +1765,9 @@ wasmFunc();
 
 ***************************************************************************************************************************
 [
-% cd $HOME/Desktop/GitHub/JavaScript-1/WebAssembly/Python/
+% cd $HOME
+% mkdir -p Python
+% cd Python
 ]
 
 % nano complete.html
@@ -1881,17 +1865,14 @@ wasmFunc();
 
 % open -n -a "Google Chrome" --args "--new-window" file:///$HOME/Desktop/GitHub/JavaScript-1/WebAssembly/Python/alternative.html
 
-===========================================================================================================================
 # CDN
-===========================================================================================================================
 % wget https://cdn.jsdelivr.net/pyodide/v0.27.0/full/pyodide.js --directory-prefix=CDN
-===========================================================================================================================
-
 ===========================================================================================================================
 # Pyodide
 ===========================================================================================================================
 [
 % cd $HOME
+% cd Python
 ]
 % wget https://github.com/pyodide/pyodide/releases/download/0.27.0/pyodide-0.27.0.tar.bz2
 % sudo tar -xvzf pyodide-0.27.0.tar.bz2
@@ -1943,7 +1924,6 @@ Math: 5 x 7 = 35
 % sudo rm -rf pyodide
 
 % find . -depth -size +50M -print
-
 ===========================================================================================================================
 # HTTP Server
 ===========================================================================================================================
@@ -1971,9 +1951,8 @@ Math: 5 x 7 = 35
 % php -S 127.0.0.1:8000
 ]
 ===========================================================================================================================
-
-===========================================================================================================================
 # Terminal New Window
+===========================================================================================================================
 % curl http://127.0.0.1:8000/complete.html
 % open http://127.0.0.1:8000/complete.html
 
@@ -1985,18 +1964,426 @@ Math: 5 x 7 = 35
 
 ***************************************************************************************************************************
 
+# Java # WebAssembly (wasm) # GraalVM # OpenJDK # Gradle # Apache Maven
+
+***************************************************************************************************************************
+===========================================================================================================================
+# Java # Apache Maven # JAVA_HOME # M2_HOME # M2 # PATH # MAVEN_OPTS
+===========================================================================================================================
+% export JAVA_HOME="$HOME/Downloads/Software/OpenJDK/JDK23.0.1/jdk-23.0.1.jdk/Contents/Home"
+% export M2_HOME="$HOME/Downloads/Software/ApacheMaven/apache-maven-3.9.9"
+% export M2="$M2_HOME/bin"
+% export PATH=$PATH:"$M2:$JAVA_HOME/bin"
+[
+% export MAVEN_OPTS="-Xms256m -Xmx512m"
+]
+% export MAVEN_OPTS="-Xms256m -Xmx512m --enable-preview"
+# Or
+% export PATH="$HOME/Downloads/Software/OpenJDK/JDK23.0.1/jdk-23.0.1.jdk/Contents/Home//bin/:$HOME/Downloads/Software/ApacheMaven/apache-maven-3.9.9/bin/":$PATH
+
+% java --version
+% mvn --version 
+===========================================================================================================================
+# Java # GraalVM # OpenJDK # Gradle # Apache Maven
+===========================================================================================================================
+% export PATH="$HOME/Downloads/Software/Oracle/GraalVM/graalvm-jdk-23.0.1+11.1/Contents/Home/bin/:$HOME/Downloads/Software/OpenJDK/JDK23.0.1/jdk-23.0.1.jdk/Contents/Home/bin/:$HOME/Downloads/Software/Gradle/gradle-8.12/bin/:$HOME/Downloads/Software/ApacheMaven/apache-maven-3.9.9/bin/":$PATH
+
+% java --version
+[
+java 23.0.1 2024-10-15
+Java(TM) SE Runtime Environment Oracle GraalVM 23.0.1+11.1 (build 23.0.1+11-jvmci-b01)
+Java HotSpot(TM) 64-Bit Server VM Oracle GraalVM 23.0.1+11.1 (build 23.0.1+11-jvmci-b01, mixed mode, sharing)
+]
+
+% gradle --version
+[
+------------------------------------------------------------
+Gradle 8.12
+------------------------------------------------------------
+
+Build time:    2024-12-20 15:46:53 UTC
+Revision:      a3cacb207fec727859be9354c1937da2e59004c1
+
+Kotlin:        2.0.21
+Groovy:        3.0.22
+Ant:           Apache Ant(TM) version 1.10.15 compiled on August 25 2024
+Launcher JVM:  23.0.1 (Oracle Corporation 23.0.1+11-jvmci-b01)
+Daemon JVM:    /Users/rajaniapple/Downloads/Software/Oracle/GraalVM/graalvm-jdk-23.0.1+11.1/Contents/Home (no JDK specified, using current Java home)
+OS:            Mac OS X 15.1 aarch64
+]
+
+% mvn --version
+[
+Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
+Maven home: /Users/rajaniapple/Downloads/Software/ApacheMaven/apache-maven-3.9.9
+Java version: 23.0.1, vendor: Oracle Corporation, runtime: /Users/rajaniapple/Downloads/Software/Oracle/GraalVM/graalvm-jdk-23.0.1+11.1/Contents/Home
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "15.1", arch: "aarch64", family: "mac"
+]
+
+% native-image --version
+[
+native-image 23.0.1 2024-10-15
+GraalVM Runtime Environment Oracle GraalVM 23.0.1+11.1 (build 23.0.1+11-jvmci-b01)
+Substrate VM Oracle GraalVM 23.0.1+11.1 (build 23.0.1+11, serial gc, compressed references)
+]
+===========================================================================================================================
+# Java # WebAssembly (wasm) # GraalVM # OpenJDK # native-image
+===========================================================================================================================
+[
+% cd $HOME
+% mkdir -p Java
+% cd Java
+]
+
+# Compile this HelloWorld.java application to bytecode and then build a native executable
+% nano HelloWorld.java 
+public class HelloWorld {
+  public static void main(String[] args) {
+    System.out.println("Hello, World!");
+  }
+}
+
+% cat HelloWorld.java 
+
+% javac HelloWorld.java
+
+% native-image HelloWorld
+
+% The last command generates an executable file named helloworld in the current working directory. Invoking it runs the natively-compiled code of the HelloWorld class as follows
+
+# ls
+
+% ./helloworld
+[
+Hello, World!
+]
+===========================================================================================================================
+# Java # WebAssembly (wasm) # GraalVM # OpenJDK # Gradle
+===========================================================================================================================
+[
+% cd $HOME
+% cd Java
+]
+
+# https://github.com/graalvm/graal-languages-demos/tree/main # zip # main
+[
+% wget --output-document=graal-languages-demos-main.zip https://github.com/graalvm/graal-languages-demos/archive/main.zip
+
+% ls
+
+% tar -xvzf graal-languages-demos-main.zip
+]
+% unzip graal-languages-demos-main.zip
+
+% cd graal-languages-demos-main/graalwasm/graalwasm-starter
+
+% ls
+
+# Gradle
+
+% ./gradlew
+
+% ./gradlew test
+
+% ls target/demo-1.0-SNAPSHOT.jar
+
+[
+% java -jar target/demo-1.0-SNAPSHOT.jar
+no main manifest attribute, in target/demo-1.0-SNAPSHOT.jar
+]
+
+% jar tvf target/demo-1.0-SNAPSHOT.jar
+
+% ./gradlew run
+
+# Test Results # Chrome
+% open -n -a "Google Chrome" --args "--new-window" "file:///$HOME/Desktop/GitHub/JavaScript-1/WebAssembly/Java/graal-languages-demos-main/graalwasm/graalwasm-starter/build/reports/tests/test/index.html"
+
+# gradlew test
+
+===========================================================================================================================
+# Java # WebAssembly (wasm) # GraalVM # OpenJDK # Gradle # WebAssembly Text Format
+===========================================================================================================================
+## Implementation Details
+The WebAssembly is stored in the resource file `add-two.wasm`.
+You can examine its textual representation in the resource file `add-two.wat`.
+If you want to experiment with and tweak the WebAssembly module, you will need to rebuild the `add-two.wasm` file from the `add-two.wat` file.
+For that, you can use the `wat2wasm` tool from the [wabt toolkit](https://github.com/WebAssembly/wabt).
+You can also use [this web app](https://webassembly.github.io/wabt/demo/wat2wasm/) to run `wat2wasm` in your browser instead of installing `wabt`.
+
+# tweak the WebAssembly module
+
+[
+# brew install wabt
+]
+
+% cat build/resources/main/com/example/add-two.wat # https://webassembly.github.io/wabt/demo/wat2wasm/
+# WAT # func (export "addTwo") 
+(module
+  (func (export "addTwo") (param i32 i32) (result i32)
+    local.get 0
+    local.get 1
+    i32.add))
+# JS # WAT # const { addTwo } = wasmInstance.exports
+const wasmInstance =
+      new WebAssembly.Instance(wasmModule, {});
+const { addTwo } = wasmInstance.exports;
+for (let i = 0; i < 10; i++) {
+  console.log(addTwo(i, i));
+}
+# JS LOG
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+
+# https://webassembly.github.io/wabt/demo/wat2wasm/
+# WAT # func $fac (export "fac")
+(module
+  (func $fac (export "fac") (param f64) (result f64)
+    local.get 0
+    f64.const 1
+    f64.lt
+    if (result f64)
+      f64.const 1
+    else
+      local.get 0
+      local.get 0
+      f64.const 1
+      f64.sub
+      call $fac
+      f64.mul
+    end))
+# JS # WAT # const { fac } = wasmInstance.exports
+const wasmInstance =
+    new WebAssembly.Instance(wasmModule, {});
+const { fac } = wasmInstance.exports;
+for (let i = 1; i <= 15; i++) {
+  console.log(fac(i));
+}
+# JS LOG
+1
+2
+6
+24
+120
+720
+5040
+40320
+362880
+3628800
+39916800
+479001600
+6227020800
+87178291200
+1307674368000
+
+# NB # Swift WATExample
+# WAT # func $factorial (export "factorial") # i64
+(module
+  ;; n! = n * (n - 1) * (n - 2) * ... * 2 * 1
+  (func $factorial (export "factorial") (param $arg i64) (result i64)
+    (if (result i64)
+      (i64.eqz (local.get $arg))
+      (then (i64.const 1))
+      (else
+        (i64.mul
+          (local.get $arg)
+          (call $factorial
+            (i64.sub
+              (local.get $arg)
+              (i64.const 1)
+            ))))))
+)
+# JS # WAT # const { factorial } = wasmInstance.exports # BigInt
+const wasmInstance =
+    new WebAssembly.Instance(wasmModule, {});
+const { factorial } = wasmInstance.exports;
+for (let i = BigInt(1); i <= 15; i++) {
+  console.log(factorial(i));
+}
+# JS LOG
+1
+2
+6
+24
+120
+720
+5040
+40320
+362880
+3628800
+39916800
+479001600
+6227020800
+87178291200
+1307674368000
+
+# https://webassembly.github.io/wabt/demo/wat2wasm/
+# WAT # (export "e" (func 1)))
+(module
+  (import "foo" "bar" (func (param f32)))
+  (memory (data "hi"))
+  (type (func (param i32) (result i32)))
+  (start 1)
+  (table 0 1 funcref)
+  (func)
+  (func (type 1)
+    i32.const 42
+    drop)
+  (export "e" (func 1)))
+# JS # WAT # const { e } = wasmInstance.exports;
+const wasmInstance = new WebAssembly.Instance(wasmModule, {
+  foo: {
+    bar() {}
+  },
+});
+const { e } = wasmInstance.exports;
+console.log(e);
+# JS LOG
+function 1() { [native code] }
+
+# https://webassembly.github.io/wabt/demo/wat2wasm/
+# WAT # (export "e" (func 2)))
+(module
+  (import "foo" "bar" (func (param f32)))
+  (memory (data "hi"))
+  (type (func (param i32) (result i32)))
+  (start 1)
+  (table 0 1 funcref)
+  (func)
+  (func (type 1)
+    i32.const 42
+    drop)
+  (export "e" (func 2)))
+# JS # WAT # const { e } = wasmInstance.exports;
+const wasmInstance = new WebAssembly.Instance(wasmModule, {
+  foo: {
+    bar() {}
+  },
+});
+const { e } = wasmInstance.exports;
+console.log(e);
+# JS LOG
+function 2() { [native code] }
+
+# https://webassembly.github.io/wabt/demo/wat2wasm/
+# WAT # import "env" "g" (global (mut i32))
+(module
+  (import "env" "g" (global (mut i32)))
+  (func (export "f")
+    i32.const 100
+    global.set 0))
+# JS # WAT # 
+const g = new WebAssembly.Global({value: 'i32', mutable: true});
+const wasmInstance = new WebAssembly.Instance(wasmModule, {env: {g}});
+console.log('before: ' + g.value);
+wasmInstance.exports.f();
+console.log('after: ' + g.value);
+# JS LOG
+before: 0
+after: 100
+
+# https://webassembly.github.io/wabt/demo/wat2wasm/
+# WAT # f32 To # i32 # Max # 2147483647 # Min # -2147483648
+(module
+  (func (export "f") (param f32) (result i32)
+    local.get 0
+    i32.trunc_sat_f32_s))
+# JS # WAT # Infinity # -Infinity
+const wasmInstance = new WebAssembly.Instance(wasmModule);
+const {f} = wasmInstance.exports;
+console.log(f(Infinity));
+console.log(f(-Infinity));
+# JS LOG
+2147483647
+-2147483648
+
+# https://webassembly.github.io/wabt/demo/wat2wasm/
+# WAT i32.extend8 # Int8 # extend # signed
+(module
+  (func (export "f") (param i32) (result i32)
+    local.get 0
+    i32.extend8_s))
+# JS # WAT # extend # signed
+const wasmInstance = new WebAssembly.Instance(wasmModule);
+const {f} = wasmInstance.exports;
+console.log(f(0));
+console.log(f(127));
+console.log(f(128));
+console.log(f(255));
+# JS LOG
+0
+127
+-128
+-1
+
+# https://webassembly.github.io/wabt/demo/wat2wasm/
+# WAT # Subtraction # Reverse
+(module
+  (func $swap (param i32 i32) (result i32 i32)
+    local.get 1
+    local.get 0)
+
+  (func (export "reverseSub") (param i32 i32) (result i32)
+    local.get 0
+    local.get 1
+    call $swap
+    i32.sub)) 
+# JS # WAT # Swap
+const wasmInstance = new WebAssembly.Instance(wasmModule);
+const {reverseSub} = wasmInstance.exports;
+console.log(reverseSub(10, 3));
+# JS LOG
+-7
+
+# https://webassembly.github.io/wabt/demo/wat2wasm/
+# WAT # memory.fill 
+(module
+  (memory (export "mem") 1)
+  (func (export "fill") (param i32 i32 i32)
+    local.get 0
+    local.get 1
+    local.get 2
+    memory.fill))
+# JS # WAT # em.buffer 
+const wasmInstance = new WebAssembly.Instance(wasmModule);
+const {fill, mem} = wasmInstance.exports;
+// index // value // count
+fill(2, 22, 2);
+fill(10, 55, 8);
+fill(6, 88, 5);
+// overwrite
+fill(6, 66, 4);
+// Uint8Array buffer, index, count
+console.log(new Uint8Array(mem.buffer, 0, 50));
+console.log(new Uint8Array(mem.buffer, 0, 25));
+# JS LOG
+0,0,22,22,0,0,66,66,66,66,88,55,55,55,55,55,55,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,22,22,0,0,66,66,66,66,88,55,55,55,55,55,55,55,0,0,0,0,0,0,0
+===========================================================================================================================
+***************************************************************************************************************************
+
+
+***************************************************************************************************************************
+
 # CS # WebAssembly (wasm) # dotnet # wasmbrowser # Node.js # wasmconsole
 
 ***************************************************************************************************************************
 [
 % cd $HOME
+% mkdir -p CS
+% cd CS
 ]
 
 % dotnet --version
-
-% mkdir -p CS
-
-% cd CS
 
 % dotnet new console --name Wasm
 
@@ -2131,12 +2518,9 @@ export function math(x, y) {
 % dotnet build
 
 % dotnet run
-
 ===========================================================================================================================
 # Terminal New Window
 # curl http(s) or open http(s) form dotnet run
-===========================================================================================================================
-
 ===========================================================================================================================
 # Manual # Copy # Build # Release
 ===========================================================================================================================
@@ -2159,8 +2543,6 @@ export function math(x, y) {
 % cd WasmRelease/wwwroot
 ]
 ===========================================================================================================================
-
-===========================================================================================================================
 # Publish # Release # Default
 ===========================================================================================================================
 [
@@ -2177,7 +2559,6 @@ export function math(x, y) {
 % dotnet publish
 
 % cd bin/Release/net9.0/publish/wwwroot
-
 ===========================================================================================================================
 # HTTP Server
 ===========================================================================================================================
@@ -2205,13 +2586,9 @@ export function math(x, y) {
 % php -S 127.0.0.1:8000
 ]
 ===========================================================================================================================
-
-===========================================================================================================================
 # Terminal New Window
 % curl http://127.0.0.1:8000
 % open http://127.0.0.1:8000
-===========================================================================================================================
-
 ===========================================================================================================================
 # CS # WebAssembly (wasm) # dotnet # wasmbrowser
 ===========================================================================================================================
@@ -2241,8 +2618,6 @@ export function math(x, y) {
 ===========================================================================================================================
 # Terminal New Window
 # curl http(s) or open http(s) form dotnet run
-===========================================================================================================================
-
 ===========================================================================================================================
 # CS # WebAssembly (wasm) # dotnet # wasmconsole # Node.js
 ===========================================================================================================================
@@ -2295,12 +2670,10 @@ Hello, Console!
 
 ***************************************************************************************************************************
 [
-% cd $HOME/Desktop/GitHub/JavaScript-1/WebAssembly
-]
-
+% cd $HOME
 % mkdir -p FS
-
 % cd FS
+]
 
 % dotnet --version
 
@@ -2340,8 +2713,6 @@ Hello, Console!
 
 % sudo dotnet run --project src/FSWebAssembly.Server
 ===========================================================================================================================
-
-===========================================================================================================================
 # Terminal New Window # http(s) # curl # wget # open
 ===========================================================================================================================
 ---------------------------------------------------------------------------------------------------------------------------
@@ -2360,8 +2731,6 @@ Hello, Console!
 
 % open https://localhost:44303/
 ---------------------------------------------------------------------------------------------------------------------------
-
----------------------------------------------------------------------------------------------------------------------------
 # http
 ---------------------------------------------------------------------------------------------------------------------------
 % curl http://localhost:5015/
@@ -2369,7 +2738,6 @@ Hello, Console!
 % open http://localhost:5015/
 ---------------------------------------------------------------------------------------------------------------------------
 ===========================================================================================================================
-
 # Browser
 # https://localhost:44303/ # http://localhost:5015/
 # Sign in
@@ -2381,7 +2749,6 @@ sign in
 
 # Click Reload
 # Sign out
-
 ***************************************************************************************************************************
 
 
@@ -2390,13 +2757,15 @@ sign in
 # Ruby # WebAssembly (wasm) # WASI # ruby.wasm # wasmtime # Node.js
 
 ***************************************************************************************************************************
-[
-% cd $HOME
-]
-
 ===========================================================================================================================
 # Ruby # WebAssembly (wasm) # Browser
 ===========================================================================================================================
+[
+% cd $HOME
+% mkdir -p Ruby
+% cd Ruby
+]
+
 % mkdir -p "Ruby on Browser"
 
 % cd "Ruby on Browser"
@@ -2534,7 +2903,6 @@ sign in
 % cat async_await_wasm_wasi.html
 
 % open -n -a "Google Chrome" --args "--new-window" "file:///$HOME/Desktop/GitHub/JavaScript-1/WebAssembly/Ruby/Ruby%20on%20Browser/async_await_wasm_wasi.html"
-
 ===========================================================================================================================
 # NB
 ===========================================================================================================================
@@ -2599,8 +2967,6 @@ rand.to_i # => 0
 rand.to_f # => 0.123456789
 ]
 ===========================================================================================================================
-
-===========================================================================================================================
 # CDN
 ===========================================================================================================================
 % wget https://cdn.jsdelivr.net/npm/@ruby/3.3-wasm-wasi@2.7.0/dist/browser.script.iife.js --directory-prefix=CDN
@@ -2610,8 +2976,6 @@ rand.to_f # => 0.123456789
 % wget https://cdn.jsdelivr.net/npm/@ruby/3.3-wasm-wasi@2.7.0/dist/ruby+stdlib.wasm --directory-prefix=CDN
 
 % wget https://cdn.jsdelivr.net/npm/@ruby/wasm-wasi@2.7.0/dist/browser.umd.js --directory-prefix=CDN
-===========================================================================================================================
-
 ===========================================================================================================================
 # HTTP Server
 ===========================================================================================================================
@@ -2639,9 +3003,8 @@ rand.to_f # => 0.123456789
 % php -S 127.0.0.1:8000
 ]
 ===========================================================================================================================
-
-===========================================================================================================================
 # Terminal New Window
+===========================================================================================================================
 % curl http://127.0.0.1:8000/index.html
 % open http://127.0.0.1:8000/index.html
 
@@ -2659,8 +3022,6 @@ rand.to_f # => 0.123456789
 
 % curl http://127.0.0.1:8000/async_await_wasm_wasi.html
 % open http://127.0.0.1:8000/async_await_wasm_wasi.html
-===========================================================================================================================
-
 ===========================================================================================================================
 # Ruby # WebAssembly (wasm) # WASI # ruby.wasm # wasmtime
 ===========================================================================================================================
@@ -2716,8 +3077,6 @@ rand.to_f # => 0.123456789
 Ruby: ruby 3.3.3 (2024-06-12 revision f1c7b6f435) [wasm32-wasi]
 ]
 ===========================================================================================================================
-
-===========================================================================================================================
 # Ruby # WebAssembly (wasm) # npm install --save @ruby/3.3-wasm-wasi @ruby/wasm-wasi # Node.js
 ===========================================================================================================================
 % mkdir -p NodeJS
@@ -2760,462 +3119,6 @@ Math: 5 x 7 = 35
 ]
 ===========================================================================================================================
 ***************************************************************************************************************************
-
-
-***************************************************************************************************************************
-
-# Java # WebAssembly (wasm) # mvn # teavm
-
-***************************************************************************************************************************
-[
-% cd $HOME
-]
-
-% mkdir -p Java
-
-% cd Java
-
-[
-# Java 23
-# OpenJDK 23
-# Apache Maven 3.9.9
-% export JAVA_HOME="$HOME/Downloads/Software/OpenJDK/JDK23.0.1/jdk-23.0.1.jdk/Contents/Home"
-% export M2_HOME="$HOME/Downloads/Software/ApacheMaven/apache-maven-3.9.9"
-% export M2="$M2_HOME/bin"
-% export PATH=$PATH:"$M2:$JAVA_HOME/bin"
-[
-% export MAVEN_OPTS="-Xms256m -Xmx512m"
-]
-% export MAVEN_OPTS="-Xms256m -Xmx512m --enable-preview"
-# Or
-% export PATH="$HOME/Downloads/Software/OpenJDK/JDK23.0.1/jdk-23.0.1.jdk/Contents/Home//bin/:$HOME/Downloads/Software/ApacheMaven/apache-maven-3.9.9/bin/":$PATH
-
-% java --version
-
-% mvn --version
-
-% mvn -DarchetypeCatalog=local -DarchetypeGroupId=org.teavm -DarchetypeArtifactId=teavm-maven-webapp -DarchetypeVersion=0.10.2 archetype:generate
-
-# pom.xml # Edit
-  <properties>
-    <java.version>23</java.version>
-    <teavm.version>0.10.2</teavm.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
-      <!-- Configure WAR plugin to include JavaScript files generated by TeaVM -->
-      <plugin>
-    	<groupId>org.apache.maven.plugins</groupId>
-    	<artifactId>maven-war-plugin</artifactId>
-        <version>3.4.0</version>
-        <configuration>
-          <webResources>
-            <resource>
-              <directory>${project.build.directory}/generated/js</directory>
-            </resource>
-          </webResources>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.6.0</version>
-
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
-          </execution>
-        </executions>
-
-        <configuration>
-          <includePluginDependencies>true</includePluginDependencies>
-          <mainClass>fi.iki.elonen.SimpleWebServer</mainClass>
-           <arguments>
-            <argument>-d</argument>
-            <argument>${project.build.directory}/${project.build.finalName}</argument>
-          </arguments>
-        </configuration>
-
-        <dependencies>
-          <dependency>
-            <groupId>org.nanohttpd</groupId>
-		<artifactId>nanohttpd-webserver</artifactId>
-		<version>2.3.1</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-
-]
-
-# Java 8
-# JDK 8 
-# Apache Maven 3.9.9
-% export PATH="$HOME/Downloads/Software/JDK/JDK8/jdk1.8.0_401.jdk/Contents/Home/bin/:$HOME/Downloads/Software/ApacheMaven/apache-maven-3.9.9/bin/":$PATH
-
-% java -version
-
-% mvn --version
-
-% mvn -DarchetypeCatalog=local -DarchetypeGroupId=org.teavm -DarchetypeArtifactId=teavm-maven-webapp -DarchetypeVersion=0.5.1 archetype:generate
-
-# com.commons
-
-# wasmbrowser
-
-# 1.0.0
-
-# com.commons.project
-
-# Y
-
-% cd wasmbrowser
-
-% mvn package
-
-# pom.xml # Edit
-[
-#
-      <!-- Configure WAR plugin to include JavaScript files generated by TeaVM -->
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.4</version>
-        <configuration>
-          <webResources>
-            <resource>
-              <directory>${project.build.directory}/webapp</directory>
-            </resource>
-          </webResources>
-        </configuration>
-      </plugin>
-#
-            <configuration>
-              <!-- Directory where TeaVM should put generated files. This configuration conforms to the settings
-                   of the WAR plugin -->
-              <targetDirectory>${project.build.directory}/webapp/wasm</targetDirectory>
-              <targetFileName>index.wasm</targetFileName>
-              <targetType>WEBASSEMBLY</targetType>
-
-              <!-- Main class, containing static void main(String[]) -->
-              <mainClass>com.commons.project.Client</mainClass>
-
-              <!-- Optimization level. Valid values are: SIMPLE, ADVANCED, FULL -->
-              <optimizationLevel>ADVANCED</optimizationLevel>
-            </configuration>
-# 
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.6.0</version>
-
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
-          </execution>
-        </executions>
-
-        <configuration>
-          <includePluginDependencies>true</includePluginDependencies>
-          <mainClass>fi.iki.elonen.SimpleWebServer</mainClass>
-           <arguments>
-            <argument>-d</argument>
-            <argument>${project.build.directory}/${project.build.finalName}</argument>
-          </arguments>
-        </configuration>
-
-        <dependencies>
-          <dependency>
-            <groupId>org.nanohttpd</groupId>
-		<artifactId>nanohttpd-webserver</artifactId>
-		<version>2.3.1</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-]
-
-% cat pom.xml
-[
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>com.commons</groupId>
-  <artifactId>wasmbrowser</artifactId>
-  <version>1.0.0</version>
-  <packaging>war</packaging>
-
-  <properties>
-    <java.version>1.8</java.version>
-    <teavm.version>0.5.1</teavm.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
-  <dependencies>
-    <!-- Emulator of Java class library for TeaVM -->
-    <dependency>
-      <groupId>org.teavm</groupId>
-      <artifactId>teavm-classlib</artifactId>
-      <version>${teavm.version}</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <!-- JavaScriptObjects (JSO) - a JavaScript binding for TeaVM -->
-    <dependency>
-      <groupId>org.teavm</groupId>
-      <artifactId>teavm-jso-apis</artifactId>
-      <version>${teavm.version}</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <!-- Servlet 3.1 specification -->
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <!-- Configure Java compiler to use Java 8 syntax  -->
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
-        <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-        </configuration>
-      </plugin>
-
-      <!-- Configure WAR plugin to include JavaScript files generated by TeaVM -->
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.4</version>
-        <configuration>
-          <webResources>
-            <resource>
-              <directory>${project.build.directory}/webapp</directory>
-            </resource>
-          </webResources>
-        </configuration>
-      </plugin>
-
-      <!-- Configure TeaVM -->
-      <plugin>
-        <groupId>org.teavm</groupId>
-        <artifactId>teavm-maven-plugin</artifactId>
-        <version>${teavm.version}</version>
-        <executions>
-          <execution>
-            <id>web-client</id>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-            <configuration>
-              <!-- Directory where TeaVM should put generated files. This configuration conforms to the settings
-                   of the WAR plugin -->
-              <targetDirectory>${project.build.directory}/webapp/wasm</targetDirectory>
-              <targetFileName>index.wasm</targetFileName>
-              <targetType>WEBASSEMBLY</targetType>
-
-              <!-- Main class, containing static void main(String[]) -->
-              <mainClass>com.commons.project.Client</mainClass>
-
-              <!-- Optimization level. Valid values are: SIMPLE, ADVANCED, FULL -->
-              <optimizationLevel>ADVANCED</optimizationLevel>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.6.0</version>
-
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
-          </execution>
-        </executions>
-
-        <configuration>
-          <includePluginDependencies>true</includePluginDependencies>
-          <mainClass>fi.iki.elonen.SimpleWebServer</mainClass>
-           <arguments>
-            <argument>-d</argument>
-            <argument>${project.build.directory}/${project.build.finalName}</argument>
-          </arguments>
-        </configuration>
-
-        <dependencies>
-          <dependency>
-            <groupId>org.nanohttpd</groupId>
-		<artifactId>nanohttpd-webserver</artifactId>
-		<version>2.3.1</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-
-    </plugins>
-  </build>
-</project>
-]
-
-% nano src/main/java/com/commons/project/Client.java
-[
-package com.commons.project;
-
-import org.teavm.interop.*;
-
-public class Client {
-
-    @Export(name = "math")
-    public static void math(int x, int y) {
-        run(x * y);
-    }
-
-    @Import(module = "env", name = "run")
-    private static native void run(int number);
-}
-]
-% cat src/main/java/com/commons/project/Client.java
-
-% nano src/main/webapp/index.js
-[
-let x = 5;
-let y = 7;
-let result = 0;
-
-function run(number) {
-    console.log("WASM called JavaScript run method.");
-    result = number;
-    console.log(`Math: ${x} x ${y} = ${result}`);
-}
-
-WebAssembly.instantiateStreaming (
-  fetch('wasm/index.wasm'), {env: {run}})
-    .then(module => { 
-      console.log("Calling the wasm module from JavaScript.");
-
-      module.instance.exports.math(x, y);
-
-      document.body.innerHTML = `Browser: ${navigator.userAgent} <br\><br\> Math: ${x} x ${y} = ${result}`;
-});
-]
-% cat src/main/webapp/index.js
-
-% nano src/main/webapp/index.html
-[
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Java WebAssembly</title>
-    <script type="module" src="./index.js"></script>
-  </head>
-  <body></body>
-</html>
-]
-% cat src/main/webapp/index.html
-
-% mkdir -p src/main/resources/META-INF/nanohttpd/
-
-% ls -p src/main/resources/META-INF/nanohttpd/
-
-% nano src/main/resources/META-INF/nanohttpd/mimetypes.properties
-[
-wasm=application/wasm
-]
-
-% cat src/main/resources/META-INF/nanohttpd/mimetypes.properties
-
-[
-% ls src/main/webapp
-% wget https://www.google.com/favicon.ico --directory-prefix=src/main/webapp
-% ls src/main/webapp
-]
-
-% mvn clean
-
-% mvn package
-
-# Terminal New Window
-% curl http://127.0.0.1:8080
-% open http://127.0.0.1:8080
-
-% jar tvf target/wasmbrowser-1.0.0.war
-
-% export JAVA_HOME="$HOME/Downloads/Software/OpenJDK/JDK23.0.1/jdk-23.0.1.jdk/Contents/Home/"
-
-% cd "$HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/bin"
-
-% ./startup.sh
-
-% open http://localhost:8080/
-
-% ls $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps
-
-% cp $HOME/Desktop/GitHub/Auxiliary-Add/WebAssembly/Java/wasmbrowser/target/wasmbrowser-1.0.0.war $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps
-
-% ls $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps
-
-% open http://localhost:8080/wasmbrowser-1.0.0
-
-% ./shutdown.sh
-
-% ls $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps
-
-% rm -rf $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps/wasmbrowser-1.0.0.war
-
-% ls $HOME/Downloads/Software/ApacheTomcat/apache-tomcat-11.0.1/webapps
-
-cd $HOME
-
-===========================================================================================================================
-# HTTP Server
-===========================================================================================================================
-[
-% npm install http-server --global
-]
-% npm --version
-% http-server -p 8000
-[
-% python3 --version
-% python3 -m http.server 8000
-]
-[
-% export PATH="$HOME/Downloads/Software/OpenJDK/JDK23.0.1/jdk-23.0.1.jdk/Contents/Home/bin/":$PATH
-% java --version
-% jwebserver --port 8000  
-]
-[
-% ruby --version
-% gem install webrick
-% ruby -run -e httpd . -p 8000
-]
-[
-% php --version 
-% php -S 127.0.0.1:8000
-]
-===========================================================================================================================
-
-===========================================================================================================================
-# Terminal New Window
-% curl http://127.0.0.1:8000
-% open http://127.0.0.1:8000
-===========================================================================================================================
-***************************************************************************************************************************
 ###########################################################################################################################
 
 
@@ -3242,15 +3145,17 @@ https://rust-lang.org/
 https://python.org/
 https://pypi.org/
 https://pyodide.org/
+https://openjdk.org/
+https://oracle.com/java/
+https://graalvm.org/
 https://dotnet.microsoft.com/
 https://developer.microsoft.com/
 https://fsharp.org/
 https://foundation.fsharp.org/
 https://fsbolero.io/
+https://nuget.org/
 https://ruby-lang.org/
 https://rubygems.org/
-https://openjdk.org/
-https://oracle.com/java/
 https://php.net/
 https://gcc.gnu.org/
 https://maven.apache.org/
