@@ -86,7 +86,7 @@ Credits/openjdk.org.svg)](https://openjdk.org/)
 [![image](
 Credits/Java-oracle.com.svg)](https://oracle.com/java/)  
 [![image](
-Credits/spring.io.svg.svg)](https://spring.io.svg/)  
+Credits/spring.io.svg)](https://spring.io.svg/)  
 [![image](
 Credits/graalvm.org.svg)](https://graalvm.org/)  
 [![image](
