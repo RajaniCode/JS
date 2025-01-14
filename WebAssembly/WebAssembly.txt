@@ -2252,7 +2252,6 @@ for (let i = BigInt(1); i <= 15; i++) {
 87178291200
 1307674368000
 
-# https://webassembly.github.io/wabt/demo/wat2wasm/
 # WAT # (export "e" (func 1)))
 (module
   (import "foo" "bar" (func (param f32)))
@@ -2276,7 +2275,6 @@ console.log(e);
 # JS LOG
 function 1() { [native code] }
 
-# https://webassembly.github.io/wabt/demo/wat2wasm/
 # WAT # (export "e" (func 2)))
 (module
   (import "foo" "bar" (func (param f32)))
@@ -2300,7 +2298,6 @@ console.log(e);
 # JS LOG
 function 2() { [native code] }
 
-# https://webassembly.github.io/wabt/demo/wat2wasm/
 # WAT # import "env" "g" (global (mut i32))
 (module
   (import "env" "g" (global (mut i32)))
@@ -2317,7 +2314,6 @@ console.log('after: ' + g.value);
 before: 0
 after: 100
 
-# https://webassembly.github.io/wabt/demo/wat2wasm/
 # WAT # f32 To # i32 # Max # 2147483647 # Min # -2147483648
 (module
   (func (export "f") (param f32) (result i32)
@@ -2332,7 +2328,6 @@ console.log(f(-Infinity));
 2147483647
 -2147483648
 
-# https://webassembly.github.io/wabt/demo/wat2wasm/
 # WAT i32.extend8 # Int8 # extend # signed
 (module
   (func (export "f") (param i32) (result i32)
@@ -2351,7 +2346,6 @@ console.log(f(255));
 -128
 -1
 
-# https://webassembly.github.io/wabt/demo/wat2wasm/
 # WAT # Subtraction # Reverse
 (module
   (func $swap (param i32 i32) (result i32 i32)
@@ -2370,7 +2364,6 @@ console.log(reverseSub(10, 3));
 # JS LOG
 -7
 
-# https://webassembly.github.io/wabt/demo/wat2wasm/
 # WAT # memory.fill 
 (module
   (memory (export "mem") 1)
@@ -2675,6 +2668,7 @@ There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR P
 [
 package com.example;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -2683,25 +2677,47 @@ import org.graalvm.polyglot.Source;
 import org.graalvm.polyglot.Value;
 
 public class App {
-   public static void main(String[] args) throws IOException {
-      // Find the WebAssembly module resource
-      URL wasmFile = App.class.getResource("floyd.wasm");
+    public static void main(String[] args) throws IOException {
+      	SystemProperties propertiesSystem = new SystemProperties();
+    	propertiesSystem.print();
+     	System.out.println();
 
-      // Setup context
-      Context.Builder contextBuilder = Context.newBuilder("wasm").option("wasm.Builtins", "wasi_snapshot_preview1");
-      Source.Builder sourceBuilder = Source.newBuilder("wasm", wasmFile).name("example");
-      Source source = sourceBuilder.build();
-      Context context = contextBuilder.build();
+     	System.out.println("Embed C in Java");
+      	// Find the WebAssembly module resource
+      	URL wasmFile = App.class.getResource("floyd.wasm");
 
-      // Evaluate the WebAssembly module
-      context.eval(source);
+      	// Setup context
+      	Context.Builder contextBuilder = Context.newBuilder("wasm").option("wasm.Builtins", "wasi_snapshot_preview1");
+      	Source.Builder sourceBuilder = Source.newBuilder("wasm", wasmFile).name("example");
+      	Source source = sourceBuilder.build();
+      	Context context = contextBuilder.build();
 
-      // Execute the floyd function
-      context.getBindings("wasm").getMember("example").getMember("_initialize").executeVoid();
-      Value mainFunction = context.getBindings("wasm").getMember("example").getMember("floyd");
-      mainFunction.execute();
-      context.close();
-   }
+      	// Evaluate the WebAssembly module
+      	context.eval(source);
+
+      	// Execute the floyd function
+      	context.getBindings("wasm").getMember("example").getMember("_initialize").executeVoid();
+      	Value mainFunction = context.getBindings("wasm").getMember("example").getMember("floyd");
+      	mainFunction.execute();
+      	context.close();
+     	System.out.println();
+
+      	System.out.println("Embedding GraalWasm in Java");
+      	App instance = new App();
+      	instance.loadWebAssembly();
+    }
+}
+
+class SystemProperties {
+  public void print() {
+      System.out.println(String.format("OS Name: %s", System.getProperty("os.name")));
+      System.out.println(String.format("OS Version: %s", System.getProperty("os.version")));
+      System.out.println(String.format("OS Architecture: %s", System.getProperty("os.arch")));
+      System.out.println(String.format("Java Version: %s", System.getProperty("java.version")));
+      System.out.println(String.format("Java Vendor Version: %s", System.getProperty("java.vendor.version")));
+      System.out.println(String.format("Java VM Name: %s", System.getProperty("java.vm.name")));
+      // System.getProperties().list(System.out);
+  }
 }
 ]
 
@@ -2797,6 +2813,97 @@ public class App {
 [INFO] Finished at: 2025-01-12T05:49:09+05:30
 [INFO] ------------------------------------------------------------------------
 ]
+
+===========================================================================================================================
+
+# Java # WebAssembly (wasm) # GraalWasm # Embedding GraalWasm in Java
+
+===========================================================================================================================
+
+% nano src/main/java/com/example/App.java
+[
+package com.example;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
+import org.graalvm.polyglot.Context;
+import org.graalvm.polyglot.Source;
+import org.graalvm.polyglot.Value;
+
+public class App {
+    public static void main(String[] args) throws IOException {
+      	SystemProperties propertiesSystem = new SystemProperties();
+    	propertiesSystem.print();
+     	System.out.println();
+
+     	System.out.println("Embed C in Java");
+      	// Find the WebAssembly module resource
+      	URL wasmFile = App.class.getResource("floyd.wasm");
+
+      	// Setup context
+      	Context.Builder contextBuilder = Context.newBuilder("wasm").option("wasm.Builtins", "wasi_snapshot_preview1");
+      	Source.Builder sourceBuilder = Source.newBuilder("wasm", wasmFile).name("example");
+      	Source source = sourceBuilder.build();
+      	Context context = contextBuilder.build();
+
+      	// Evaluate the WebAssembly module
+      	context.eval(source);
+
+      	// Execute the floyd function
+      	context.getBindings("wasm").getMember("example").getMember("_initialize").executeVoid();
+      	Value mainFunction = context.getBindings("wasm").getMember("example").getMember("floyd");
+      	mainFunction.execute();
+      	context.close();
+     	System.out.println();
+
+      	System.out.println("Embedding GraalWasm in Java");
+      	App instance = new App();
+      	instance.loadWebAssembly();
+    }
+
+    private void loadWebAssembly() throws IOException {
+      	try (Context context = Context.newBuilder("wasm").option("wasm.Builtins", "wasi_snapshot_preview1").build()) {
+
+      	    // Evaluate the WebAssembly module
+	    System.out.println("Using path to floyd.wasm");
+	    String path = System.getProperty("user.dir") + "/target/classes/com/example/";
+ 	    Source source = Source.newBuilder("wasm", new File(path + "floyd.wasm")).name("example").build();
+	    /*
+      	    // Find the WebAssembly module resource
+      	    URL wasmFile = App.class.getResource("floyd.wasm");
+      	    Source source = Source.newBuilder("wasm", wasmFile).name("example").build();
+	    */
+
+      	    context.eval(source);
+
+      	    // Initialize the module and execute the floyd function
+      	    Value exampleModule = context.getBindings("wasm").getMember("example");
+      	    exampleModule.getMember("_initialize").executeVoid();
+      	    Value floydFunction = exampleModule.getMember("floyd");
+            floydFunction.execute();
+	}
+    }
+}
+
+class SystemProperties {
+  public void print() {
+      System.out.println(String.format("OS Name: %s", System.getProperty("os.name")));
+      System.out.println(String.format("OS Version: %s", System.getProperty("os.version")));
+      System.out.println(String.format("OS Architecture: %s", System.getProperty("os.arch")));
+      System.out.println(String.format("Java Version: %s", System.getProperty("java.version")));
+      System.out.println(String.format("Java Vendor Version: %s", System.getProperty("java.vendor.version")));
+      System.out.println(String.format("Java VM Name: %s", System.getProperty("java.vm.name")));
+      // System.getProperties().list(System.out);
+  }
+}
+]
+
+% mvn package  
+
+% mvn exec:java -Dexec.mainClass=com.example.App
+
 ===========================================================================================================================
 
 # Java # WebAssembly (wasm) # Spring Boot # GraalVM # Native Support # Spring Web # Gradle # Groovy # Kotlin # Maven
