@@ -1,8 +1,6 @@
 JavaScript
 ----------
 
-- WebAssembly
-
 - Node.js
 
 - Express.js
