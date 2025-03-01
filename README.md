@@ -20,8 +20,6 @@ JavaScript
 Credits
 -------
 [![image](
-Credits/webassembly.org.svg)](https://webassembly.org/)  
-[![image](
 Credits/nodejs.org.svg)](https://nodejs.org/)  
 [![image](
 Credits/npmjs.com.svg)](https://npmjs.com/)  
